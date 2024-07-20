@@ -29,6 +29,4 @@ public class PlayerScript : MonoBehaviour
         moveVector = new Vector3(xInput, yInput, 0).normalized * moveSpeed * Time.deltaTime;
         transform.Translate(moveVector);
     }
-
-    
 }
