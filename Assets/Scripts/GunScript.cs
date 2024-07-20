@@ -17,10 +17,6 @@ public class GunScript : MonoBehaviour
         CameraCode();
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
 
     void CameraCode()
     {

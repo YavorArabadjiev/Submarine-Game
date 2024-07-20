@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    GameObject player;
     [SerializeField] float speed = 5f;
-    
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");            
+    }
+
     void Start()
     {
         
