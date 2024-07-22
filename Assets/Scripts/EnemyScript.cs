@@ -4,6 +4,7 @@ public class EnemyScript : MonoBehaviour
 {
     GameObject player;
     [SerializeField] float speed = 5f;
+    public int healthPoints = 50;
 
     private void Awake()
     {
