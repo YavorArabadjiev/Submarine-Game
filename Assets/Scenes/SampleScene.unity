@@ -214,7 +214,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTime: 2
-  enemy: {fileID: 3375084156086431697, guid: 1f7df1236266f2c4fbfbb323ddb3337a, type: 3}
+  enemy:
+  - {fileID: 3375084156086431697, guid: 1f7df1236266f2c4fbfbb323ddb3337a, type: 3}
+  - {fileID: 3375084156086431697, guid: 4f01181d63286d2489932c26c3dc8ff3, type: 3}
 --- !u!4 &323780292
 Transform:
   m_ObjectHideFlags: 0
