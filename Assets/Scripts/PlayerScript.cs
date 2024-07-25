@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using System;
+using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
 
@@ -12,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject[] enemy;
     [SerializeField] float playerSaveTimeSeconds = 1.5f;
     [SerializeField] TextMeshProUGUI playerHealthText;
+    [SerializeField] GameObject gameOverMenu;
     void Start()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
@@ -21,11 +24,17 @@ public class PlayerScript : MonoBehaviour
     {
         playerHealthText.text = healthPoints.ToString();
 
-        if(healthPoints <= 0)
+        if (healthPoints <= 0)
         {
             gameObject.transform.DetachChildren();
+            gameOverMenu.SetActive(true);
             Destroy(gameObject);
         }
+    }
+
+    public void GameOverMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void FixedUpdate()
@@ -45,27 +54,21 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            //gameObject.transform.DetachChildren();
-            //Destroy(gameObject);
+
 
             healthPoints -= 1;
             StartCoroutine(safeTime());
 
             IEnumerator safeTime()
             {
-                //Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemy[0].GetComponent<Collider2D>());
-                //Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemy[1].GetComponent<Collider2D>());
-                if(collision.gameObject.tag == "Enemy")
+
+                if (collision.gameObject.tag == "Enemy")
                 {
                     healthPoints -= 0;
                 }
                 yield return new WaitForSeconds(playerSaveTimeSeconds);
-                //Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemy[0].GetComponent<Collider2D>(), false);
-                //Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), enemy[1].GetComponent<Collider2D>(), false);
             }
-
-            
         }
-    }
 
+    }
 }
