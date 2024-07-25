@@ -13,8 +13,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] int healthPoints = 3;
     [SerializeField] GameObject[] enemy;
     [SerializeField] float playerSaveTimeSeconds = 1.5f;
-    [SerializeField] TextMeshProUGUI playerHealthText;
     [SerializeField] GameObject gameOverMenu;
+    [SerializeField] GameObject[] healthUI;
     void Start()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
@@ -22,10 +22,19 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        playerHealthText.text = healthPoints.ToString();
+        if(healthPoints == 2) 
+        {
+            healthUI[2].SetActive(false);
+        }
+
+        if (healthPoints == 1)
+        {
+            healthUI[1].SetActive(false);
+        }
 
         if (healthPoints <= 0)
         {
+            healthUI[0].SetActive(false);
             gameObject.transform.DetachChildren();
             gameOverMenu.SetActive(true);
             Destroy(gameObject);
