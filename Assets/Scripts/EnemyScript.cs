@@ -5,15 +5,17 @@ using TMPro;
 public class EnemyScript : MonoBehaviour
 {
     GameObject player;
-    
+    [SerializeField] GameObject gem;
     [SerializeField] float speed = 5f;
     [SerializeField] int healthPoints = 50;
     [SerializeField] int playerHealthPoints = 3;
     [SerializeField] float playerSaveTimeSeconds = 1.5f;
+    
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");            
+        player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 
     // Update is called once per frame
@@ -37,6 +39,7 @@ public class EnemyScript : MonoBehaviour
 
         if(healthPoints <= 0)
         {
+            Instantiate(gem);
             Destroy(gameObject);
         }
     }
