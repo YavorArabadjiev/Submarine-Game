@@ -99,7 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a711a8695c351f45812fd8cc14a19eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gem: {fileID: 2349575790329304974, guid: 50326eef40e9bf742acbc699010a0e86, type: 3}
   speed: 2
+  healthPoints: 50
+  playerHealthPoints: 3
+  playerSaveTimeSeconds: 1.5
 --- !u!61 &3463852933948277334
 BoxCollider2D:
   m_ObjectHideFlags: 0

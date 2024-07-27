@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - Gem
+  - Bar
   layers:
   - Default
   - TransparentFX

@@ -39,7 +39,7 @@ public class EnemyScript : MonoBehaviour
 
         if(healthPoints <= 0)
         {
-            Instantiate(gem);
+            Instantiate(gem, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
