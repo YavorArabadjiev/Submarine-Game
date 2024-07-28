@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ExperienceBar : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class ExperienceBar : MonoBehaviour
    [SerializeField] private float maxXp = 100f;
    [SerializeField] private int level = 0;
    [SerializeField] private Image XpBar;
+   [SerializeField] TextMeshProUGUI levelText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,12 +32,13 @@ public class ExperienceBar : MonoBehaviour
     private void ExperienceGain()
     {
         XpBar.fillAmount = currentXp / maxXp;
-
+        levelText.text = "Level: " + level.ToString();
         if (currentXp >= maxXp) 
         { 
             level = level + 1;
             currentXp = currentXp - maxXp;
             maxXp = maxXp * 2;
+            
         }
     }
 }
