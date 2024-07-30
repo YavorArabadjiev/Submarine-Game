@@ -10,6 +10,7 @@ public class ExperienceBar : MonoBehaviour
    [SerializeField] private int level = 0;
    [SerializeField] private Image XpBar;
    [SerializeField] TextMeshProUGUI levelText;
+   [SerializeField] GameObject upgradeMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,8 @@ public class ExperienceBar : MonoBehaviour
             level = level + 1;
             currentXp = currentXp - maxXp;
             maxXp = maxXp * 2;
-            
+            Time.timeScale = 0f;
+            upgradeMenu.SetActive(true);
         }
     }
 }

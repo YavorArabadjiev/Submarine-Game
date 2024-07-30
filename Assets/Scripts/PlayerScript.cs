@@ -10,11 +10,11 @@ public class PlayerScript : MonoBehaviour
     float yInput;
     [SerializeField] float moveSpeed = 4f;
     Vector3 moveVector;
-    [SerializeField] int healthPoints = 3;
+    //[SerializeField] int healthPoints = 3;
     [SerializeField] GameObject[] enemy;
     [SerializeField] float playerSaveTimeSeconds = 1.5f;
     [SerializeField] GameObject gameOverMenu;
-    [SerializeField] GameObject[] healthUI;
+    //[SerializeField] GameObject[] healthUI;
     void Start()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
@@ -22,23 +22,23 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        if(healthPoints == 2) 
-        {
-            healthUI[2].SetActive(false);
-        }
+        //if(healthPoints == 2) 
+        //{
+        //    healthUI[2].SetActive(false);
+        //}
 
-        if (healthPoints == 1)
-        {
-            healthUI[1].SetActive(false);
-        }
+        //if (healthPoints == 1)
+        //{
+        //    healthUI[1].SetActive(false);
+        //}
 
-        if (healthPoints <= 0)
-        {
-            healthUI[0].SetActive(false);
-            gameObject.transform.DetachChildren();
-            gameOverMenu.SetActive(true);
-            Destroy(gameObject);
-        }
+        //if (healthPoints <= 0)
+        //{
+        //    healthUI[0].SetActive(false);
+        //    gameObject.transform.DetachChildren();
+        //    gameOverMenu.SetActive(true);
+        //    Destroy(gameObject);
+        //}
     }
 
     public void GameOverMenu()
@@ -65,7 +65,7 @@ public class PlayerScript : MonoBehaviour
         {
 
 
-            healthPoints -= 1;
+            //healthPoints -= 1;
             StartCoroutine(safeTime());
 
             IEnumerator safeTime()
@@ -73,7 +73,7 @@ public class PlayerScript : MonoBehaviour
 
                 if (collision.gameObject.tag == "Enemy")
                 {
-                    healthPoints -= 0;
+                    //healthPoints -= 0;
                 }
                 yield return new WaitForSeconds(playerSaveTimeSeconds);
             }

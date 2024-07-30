@@ -12,7 +12,6 @@ public class BulletScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
         mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
@@ -31,7 +30,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Wall")
         {
             Destroy(gameObject);
         }

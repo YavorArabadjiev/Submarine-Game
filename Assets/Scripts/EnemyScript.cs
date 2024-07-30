@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] GameObject gem;
     [SerializeField] float speed = 5f;
     [SerializeField] int healthPoints = 50;
-    [SerializeField] int playerHealthPoints = 3;
+    //[SerializeField] int playerHealthPoints = 3;
     [SerializeField] float playerSaveTimeSeconds = 1.5f;
     
 
@@ -22,10 +22,10 @@ public class EnemyScript : MonoBehaviour
     void FixedUpdate()
     {
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-        if(playerHealthPoints <= 0)
-        {
-            Destroy(player);
-        }
+        //if(playerHealthPoints <= 0)
+        //{
+        //    Destroy(player);
+        //}
 
         
     }

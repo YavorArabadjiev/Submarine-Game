@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Gem
   - Bar
+  - UpgradeMenu
+  - Wall
   layers:
   - Default
   - TransparentFX
