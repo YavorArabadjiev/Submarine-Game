@@ -66,6 +66,7 @@ public class PlayerScript : MonoBehaviour
 
 
             //healthPoints -= 1;
+            Destroy(collision.gameObject);
             StartCoroutine(safeTime());
 
             IEnumerator safeTime()
