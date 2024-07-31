@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class EnemySpawning : MonoBehaviour
 {
-
+    GameObject player;
     [SerializeField] float spawnTime = 2f;
     [SerializeField] GameObject[] enemy;
     float randomNumberX;
-    float randomNumberY;
+    float randomNumberX2;
+    float EnemySpawnY;
     int randomEnemies;
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(enemySpawning());
     }
 
@@ -19,7 +21,9 @@ public class EnemySpawning : MonoBehaviour
     void Update()
     {
         randomNumberX = Random.Range(-9, 10);
-        randomNumberY = Random.Range(-8, 9);
+        randomNumberX2 = Random.Range(-9, 10);
+        //randomNumberY = Random.Range(-8, 9);
+
         randomEnemies = Random.Range(0, enemy.Length);
     }
     IEnumerator enemySpawning()
@@ -27,7 +31,8 @@ public class EnemySpawning : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnTime);
-            Instantiate(enemy[randomEnemies], new Vector2(randomNumberX, randomNumberY), Quaternion.identity);
+            Instantiate(enemy[randomEnemies], new Vector2(randomNumberX, player.transform.position.y - 8f), Quaternion.identity);
+            Instantiate(enemy[randomEnemies], new Vector2(randomNumberX2, player.transform.position.y + 8f), Quaternion.identity);
         }
     }
 
