@@ -4,10 +4,11 @@ public class BulletScript : MonoBehaviour
 {
 
     Vector3 mousePosition;
-    Camera camera;
+    new Camera camera;
     Rigidbody2D rb;
     [SerializeField] float bulletSpeed;
-    [SerializeField] EnemyScript enemyScript;
+    
+    
     
     // Start is called before the first frame update
     void Start()

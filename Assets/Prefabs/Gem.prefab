@@ -134,3 +134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
+  xpPoints: 20
+  distanceBetweenPlayer: 2
+  experienceBar: {fileID: 0}

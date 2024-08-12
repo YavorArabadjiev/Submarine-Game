@@ -1,22 +1,32 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class EnemyScript : MonoBehaviour
 {
     GameObject player;
-    [SerializeField] GameObject gem;
+    [SerializeField] GameObject[] gem;
     [SerializeField] float speed = 5f;
     [SerializeField] int healthPoints = 50;
     //[SerializeField] int playerHealthPoints = 3;
-    [SerializeField] float playerSaveTimeSeconds = 1.5f;
+    //[SerializeField] float playerSaveTimeSeconds = 1.5f;
+    [SerializeField] int pointsGained = 5;
+    public int enemyLevel;
+    
     
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        
+       
     }
+
+    //private void Start()
+    //{
+    //    scoreUI = GameObject.FindGameObjectWithTag("Score");
+    //    scoreText = scoreUI.GetComponent<TextMeshProUGUI>();
+    //}
 
     // Update is called once per frame
     void FixedUpdate()
@@ -27,6 +37,10 @@ public class EnemyScript : MonoBehaviour
         //    Destroy(player);
         //}
 
+    }
+
+    private void Update()
+    {
         
     }
 
@@ -39,7 +53,17 @@ public class EnemyScript : MonoBehaviour
 
         if(healthPoints <= 0)
         {
-            Instantiate(gem, transform.position, Quaternion.identity);
+           if(enemyLevel == 0)
+           {
+                Instantiate(gem[0], transform.position, Quaternion.identity);
+           }
+
+            if (enemyLevel == 1)
+            {
+                Instantiate(gem[1], transform.position, Quaternion.identity);
+            }
+
+            ScoreScript.instance.GainPoints(pointsGained);   
             Destroy(gameObject);
         }
     }

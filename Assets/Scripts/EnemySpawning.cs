@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class EnemySpawning : MonoBehaviour
 {
@@ -8,8 +10,10 @@ public class EnemySpawning : MonoBehaviour
     [SerializeField] GameObject[] enemy;
     float randomNumberX;
     float randomNumberX2;
-    float EnemySpawnY;
     int randomEnemies;
+    int stagePhase = 1;
+     
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,18 +26,36 @@ public class EnemySpawning : MonoBehaviour
     {
         randomNumberX = Random.Range(-9, 10);
         randomNumberX2 = Random.Range(-9, 10);
-        //randomNumberY = Random.Range(-8, 9);
-
         randomEnemies = Random.Range(0, enemy.Length);
+
+        if(Time.time == 5)
+        {
+            stagePhase++;
+        }
+
     }
     IEnumerator enemySpawning()
     {
-        while (true)
+        if(stagePhase == 1)
         {
-            yield return new WaitForSeconds(spawnTime);
-            Instantiate(enemy[randomEnemies], new Vector2(randomNumberX, player.transform.position.y - 8f), Quaternion.identity);
-            Instantiate(enemy[randomEnemies], new Vector2(randomNumberX2, player.transform.position.y + 8f), Quaternion.identity);
+            while (true)
+            {
+                yield return new WaitForSeconds(spawnTime);
+                Instantiate(enemy[randomEnemies], new Vector2(randomNumberX, player.transform.position.y - 8f), Quaternion.identity);
+                Instantiate(enemy[randomEnemies], new Vector2(randomNumberX2, player.transform.position.y + 8f), Quaternion.identity);
+            }
         }
+
+        if(stagePhase == 2)
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(spawnTime - 1);
+                Instantiate(enemy[1], new Vector2(randomNumberX, player.transform.position.y - 8f), Quaternion.identity);
+                Instantiate(enemy[1], new Vector2(randomNumberX2, player.transform.position.y + 8f), Quaternion.identity);
+            }
+        }
+        
     }
 
     

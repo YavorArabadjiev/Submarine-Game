@@ -6,9 +6,9 @@ public class GemScript : MonoBehaviour
 {
     GameObject player;
     [SerializeField] float moveSpeed = 15f;
-    public int xpPoints = 0;
+    public int xpPoints = 20;
     [SerializeField] float distanceBetweenPlayer = 2f;
-    [SerializeField] ExperienceBar experienceBar;
+    ExperienceBar experienceBar;
   
 
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class GemScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            experienceBar.currentXp += 20;
+            experienceBar.currentXp += xpPoints;
             Destroy(gameObject);
         }
     }

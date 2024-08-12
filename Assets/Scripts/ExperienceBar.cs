@@ -10,9 +10,16 @@ public class ExperienceBar : MonoBehaviour
    [SerializeField] private int level = 0;
    [SerializeField] private Image XpBar;
    [SerializeField] TextMeshProUGUI levelText;
-   [SerializeField] GameObject upgradeMenu;
+   [SerializeField] public GameObject upgradeMenu;
+   [HideInInspector] public static ExperienceBar instance;
+
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         
