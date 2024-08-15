@@ -2946,6 +2946,10 @@ PrefabInstance:
       propertyPath: healthUI.Array.data[2]
       value: 
       objectReference: {fileID: 1223422258}
+    - target: {fileID: 4779855932422623706, guid: 5ae757cb0f30fdb4d9a2b80ed4ddfcb8, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 9054165628949248483, guid: 5ae757cb0f30fdb4d9a2b80ed4ddfcb8, type: 3}
       propertyPath: m_Name
       value: Player

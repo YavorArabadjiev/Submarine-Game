@@ -13,13 +13,15 @@ public class EnemyScript : MonoBehaviour
     //[SerializeField] float playerSaveTimeSeconds = 1.5f;
     [SerializeField] int pointsGained = 5;
     public int enemyLevel;
-    
-    
+    [SerializeField] float knockbackPower = 50f;
+    Rigidbody2D rb;
+
+
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-       
+        rb = GetComponent<Rigidbody2D>();
     }
 
     //private void Start()
@@ -49,6 +51,27 @@ public class EnemyScript : MonoBehaviour
         if(collision.gameObject.tag == "Bullet")
         {
             healthPoints -= 25;
+
+            StartCoroutine(knockbackCoroutine(1f));
+                //Vector2 dir = (collision.transform.position - gameObject.transform.position).normalized;
+                //Vector2 knockback = dir * knockbackPower;
+                //rb.AddForce(knockback);
+
+            IEnumerator knockbackCoroutine(float duration)
+            {
+                float timer = 0f;
+
+                while (duration > timer)
+                {
+                    timer += Time.deltaTime;
+                    Vector2 dir = (collision.transform.position - gameObject.transform.position).normalized;
+                    
+                    rb.AddForce(-dir * knockbackPower);
+                }
+
+                yield return new WaitForSeconds(0.3f);
+                rb.velocity = Vector2.zero;
+            }
         }
 
         if(healthPoints <= 0)
@@ -68,5 +91,6 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    
     
 }

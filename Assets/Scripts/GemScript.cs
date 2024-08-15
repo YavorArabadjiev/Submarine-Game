@@ -9,6 +9,7 @@ public class GemScript : MonoBehaviour
     public int xpPoints = 20;
     [SerializeField] float distanceBetweenPlayer = 2f;
     ExperienceBar experienceBar;
+    
   
 
     // Start is called before the first frame update
@@ -33,6 +34,8 @@ public class GemScript : MonoBehaviour
             experienceBar.currentXp += xpPoints;
             Destroy(gameObject);
         }
+
+        
     }
 
 }

@@ -11,6 +11,7 @@ TagManager:
   - UpgradeMenu
   - Wall
   - Score
+  - Auto Bullet
   layers:
   - Default
   - TransparentFX

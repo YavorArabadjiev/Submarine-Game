@@ -106,6 +106,7 @@ MonoBehaviour:
   healthPoints: 50
   pointsGained: 5
   enemyLevel: 0
+  knockbackPower: 0.8
 --- !u!61 &3463852933948277334
 BoxCollider2D:
   m_ObjectHideFlags: 0
