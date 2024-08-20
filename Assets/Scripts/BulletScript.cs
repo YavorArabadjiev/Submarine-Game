@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
@@ -7,6 +8,7 @@ public class BulletScript : MonoBehaviour
     new Camera camera;
     Rigidbody2D rb;
     [SerializeField] float bulletSpeed;
+    [SerializeField] float timeBeforeDestruction = 2f;
     
     
     
@@ -21,6 +23,14 @@ public class BulletScript : MonoBehaviour
         rb.velocity = new Vector2(shootDir.x, shootDir.y).normalized * bulletSpeed;
         float rotation = Mathf.Atan2(shootRotation.y, shootRotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotation + 90f);
+
+        StartCoroutine(destroyBullet());
+
+        IEnumerator destroyBullet()
+        {
+            yield return new WaitForSeconds(timeBeforeDestruction);
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -35,7 +45,9 @@ public class BulletScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        
 
     }
+
+    
 }

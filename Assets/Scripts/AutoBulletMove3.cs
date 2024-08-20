@@ -8,7 +8,7 @@ public class AutoBulletMove3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(destroyObject());
+        StartCoroutine(destroyBullet());
     }
 
     // Update is called once per frame
@@ -18,13 +18,9 @@ public class AutoBulletMove3 : MonoBehaviour
 
     }
 
-    IEnumerator destroyObject()
+    public IEnumerator destroyBullet()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(5f);
-            Destroy(gameObject);
-        }
-        
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }

@@ -52,10 +52,9 @@ public class EnemyScript : MonoBehaviour
         {
             healthPoints -= 25;
 
+            Destroy(collision.gameObject);
+
             StartCoroutine(knockbackCoroutine(1f));
-                //Vector2 dir = (collision.transform.position - gameObject.transform.position).normalized;
-                //Vector2 knockback = dir * knockbackPower;
-                //rb.AddForce(knockback);
 
             IEnumerator knockbackCoroutine(float duration)
             {
@@ -74,6 +73,7 @@ public class EnemyScript : MonoBehaviour
             }
         }
 
+        
         if(healthPoints <= 0)
         {
            if(enemyLevel == 0)
