@@ -12,8 +12,7 @@ public class AutomaticFireWeapon : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(autoShoot());
-        gameObject.GetComponent<AutomaticFireWeapon>().enabled = false;
+        //StartCoroutine(autoShoot());
     }
 
     // Update is called once per frame
@@ -41,9 +40,9 @@ public class AutomaticFireWeapon : MonoBehaviour
 
     public void AutoBulletsButton()
     {
-        gameObject.SetActive(true);
+        StartCoroutine(autoShoot());
         ExperienceBar.instance.upgradeMenu.SetActive(false);
-
+        Time.timeScale = 1f;
     }
 
     

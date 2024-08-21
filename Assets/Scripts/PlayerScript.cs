@@ -11,13 +11,15 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] float moveSpeed = 4f;
     Vector3 moveVector;
     //[SerializeField] int healthPoints = 3;
+    Rigidbody2D rb;
     [SerializeField] GameObject[] enemy;
     [SerializeField] float playerSaveTimeSeconds = 1.5f;
     [SerializeField] GameObject gameOverMenu;
-    //[SerializeField] GameObject[] healthUI;
+    //[SerializeField] GameObject[] healthUI'
     void Start()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -80,5 +82,13 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject)
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 }
