@@ -5,11 +5,11 @@ public class ShootingScript : MonoBehaviour
 {
     [SerializeField] GameObject[] bullet;
     [SerializeField] int level = 1;
-    [SerializeField] GameObject upgradeMenu;
+    GameObject upgradeMenu;
     // Start is called before the first frame update
     void Start()
     {
-        
+        upgradeMenu = GameObject.FindGameObjectWithTag("UpgradeMenu");  
     }
 
     // Update is called once per frame

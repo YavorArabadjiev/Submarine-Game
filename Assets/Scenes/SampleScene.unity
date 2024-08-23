@@ -282,7 +282,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 173535438}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1314329391}
+        m_TargetAssemblyTypeName: AutomaticFireWeapon, Assembly-CSharp
+        m_MethodName: AutoBulletsButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &173535438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2792,7 +2804,6 @@ MonoBehaviour:
   - {fileID: 4543427655390565292, guid: 6fac2c82befa7144f9e9cbd77b75c0e8, type: 3}
   - {fileID: 4543427655390565292, guid: 17ffeebdadfa6ac4887531bf64d5d49d, type: 3}
   level: 1
-  upgradeMenu: {fileID: 1594504650}
 --- !u!1001 &1441430985092650448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2946,9 +2957,13 @@ PrefabInstance:
       propertyPath: healthUI.Array.data[2]
       value: 
       objectReference: {fileID: 1223422258}
+    - target: {fileID: 3590530281318828515, guid: 5ae757cb0f30fdb4d9a2b80ed4ddfcb8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4779855932422623706, guid: 5ae757cb0f30fdb4d9a2b80ed4ddfcb8, type: 3}
       propertyPath: m_AngularDrag
-      value: 0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9054165628949248483, guid: 5ae757cb0f30fdb4d9a2b80ed4ddfcb8, type: 3}
       propertyPath: m_Name
