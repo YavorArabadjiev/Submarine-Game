@@ -15,6 +15,10 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject[] enemy;
     [SerializeField] float playerSaveTimeSeconds = 1.5f;
     [SerializeField] GameObject gameOverMenu;
+    private float playerpositionX;
+    private float playerpositionY;
+    [SerializeField] float maxposX;
+    [SerializeField] float maxposY;
     //[SerializeField] GameObject[] healthUI'
     void Start()
     {
@@ -41,6 +45,8 @@ public class PlayerScript : MonoBehaviour
         //    gameOverMenu.SetActive(true);
         //    Destroy(gameObject);
         //}
+
+        ClampPlayer();
     }
 
     public void GameOverMenu()
@@ -51,6 +57,13 @@ public class PlayerScript : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+    }
+
+    private void ClampPlayer()
+    {
+        playerpositionX = Mathf.Clamp(transform.position.x, -maxposX, maxposX);
+        playerpositionY = Mathf.Clamp(transform.position.y, -maxposY, maxposY);
+        transform.position = new Vector2(playerpositionX, playerpositionY);
     }
 
     void MovePlayer()

@@ -4,7 +4,8 @@ public class GunScript : MonoBehaviour
 {
     Vector3 camVector;
     [SerializeField] Camera cam;
-    
+    private float playerpositionX;
+    private float playerpositionY;
     
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class GunScript : MonoBehaviour
     void Update()
     {
         CameraCode();
+        
     }
 
 
