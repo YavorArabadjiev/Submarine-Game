@@ -2804,6 +2804,7 @@ MonoBehaviour:
   - {fileID: 4543427655390565292, guid: 6fac2c82befa7144f9e9cbd77b75c0e8, type: 3}
   - {fileID: 4543427655390565292, guid: 17ffeebdadfa6ac4887531bf64d5d49d, type: 3}
   level: 1
+  upgradeMenu: {fileID: 1594504650}
 --- !u!1001 &1441430985092650448
 PrefabInstance:
   m_ObjectHideFlags: 0
