@@ -6,9 +6,11 @@ public class AutoBulletMove : MonoBehaviour
 {
    [SerializeField] float bulletSpeed = 5f;
    
+   
     // Start is called before the first frame update
     void Start()
     {
+       
         StartCoroutine(destroyBullet());
     }
 

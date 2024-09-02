@@ -43,7 +43,21 @@ public class EnemyScript : MonoBehaviour
 
     private void Update()
     {
-        
+        if (healthPoints <= 0)
+        {
+            if (enemyLevel == 0)
+            {
+                Instantiate(gem[0], transform.position, Quaternion.identity);
+            }
+
+            if (enemyLevel == 1)
+            {
+                Instantiate(gem[1], transform.position, Quaternion.identity);
+            }
+
+            ScoreScript.instance.GainPoints(pointsGained);
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -73,22 +87,47 @@ public class EnemyScript : MonoBehaviour
             }
         }
 
-        
-        if(healthPoints <= 0)
+        if (collision.gameObject.tag == "AutoBullet")
         {
-           if(enemyLevel == 0)
-           {
-                Instantiate(gem[0], transform.position, Quaternion.identity);
-           }
+            healthPoints -= AutomaticFireWeapon.instance.autoWeaponShootPower;
 
-            if (enemyLevel == 1)
+            Destroy(collision.gameObject);
+
+            StartCoroutine(knockbackCoroutine(1f));
+
+            IEnumerator knockbackCoroutine(float duration)
             {
-                Instantiate(gem[1], transform.position, Quaternion.identity);
-            }
+                float timer = 0f;
 
-            ScoreScript.instance.GainPoints(pointsGained);   
-            Destroy(gameObject);
+                while (duration > timer)
+                {
+                    timer += Time.deltaTime;
+                    Vector2 dir = (collision.transform.position - gameObject.transform.position).normalized;
+
+                    rb.AddForce(-dir * knockbackPower);
+                }
+
+                yield return new WaitForSeconds(0.3f);
+                rb.velocity = Vector2.zero;
+            }
         }
+
+
+        //if (healthPoints <= 0)
+        //{
+        //   if(enemyLevel == 0)
+        //   {
+        //        Instantiate(gem[0], transform.position, Quaternion.identity);
+        //   }
+
+        //    if (enemyLevel == 1)
+        //    {
+        //        Instantiate(gem[1], transform.position, Quaternion.identity);
+        //    }
+
+        //    ScoreScript.instance.GainPoints(pointsGained);   
+        //    Destroy(gameObject);
+        //}
     }
 
     

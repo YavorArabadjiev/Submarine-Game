@@ -6,11 +6,15 @@ public class AutomaticFireWeapon : MonoBehaviour
     [SerializeField] float shootTime = 2.5f;
     [SerializeField] GameObject[] autoPellets;
     GameObject player;
+    float level = 0;
+    [HideInInspector] public static AutomaticFireWeapon instance;
+    public int autoWeaponShootPower = 25;
 
     
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         //StartCoroutine(autoShoot());
     }
@@ -40,9 +44,21 @@ public class AutomaticFireWeapon : MonoBehaviour
 
     public void AutoBulletsButton()
     {
-        StartCoroutine(autoShoot());
+        level++;
+        if(level == 1)
+        {
+            StartCoroutine(autoShoot());
+        }
         ExperienceBar.instance.upgradeMenu.SetActive(false);
         Time.timeScale = 1f;
+        if(level == 2)
+        {
+            shootTime = 0.02f;
+        }
+        if(level == 3)
+        {
+            autoWeaponShootPower = 50;
+        }
     }
 
     
