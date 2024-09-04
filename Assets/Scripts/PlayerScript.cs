@@ -20,6 +20,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] float maxposX;
     [SerializeField] float maxposY;
     //[SerializeField] GameObject[] healthUI'
+    [SerializeField] GameObject upgradeMenu;
+    [SerializeField] GameObject speedButton;
+    float speedLevel = 0;
     void Start()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
@@ -103,5 +106,21 @@ public class PlayerScript : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
         }
+    }
+
+    public void SpeedUpButton()
+    {
+        speedLevel++;
+        if(speedLevel == 1)
+        {
+            moveSpeed += 1;
+        }
+        if(speedLevel == 2)
+        {
+            moveSpeed += 2;
+            speedButton.SetActive(false);
+        }
+        upgradeMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 }
