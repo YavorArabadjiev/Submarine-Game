@@ -15,7 +15,9 @@ public class EnemyScript : MonoBehaviour
     public int enemyLevel;
     [SerializeField] float knockbackPower = 50f;
     Rigidbody2D rb;
-
+    Vector3 respawnEnemyPos;
+    bool respawnEnemyDied = false;
+    [SerializeField] GameObject respawningEnemy;
 
 
     private void Awake()
@@ -48,16 +50,36 @@ public class EnemyScript : MonoBehaviour
             if (enemyLevel == 0)
             {
                 Instantiate(gem[0], transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
 
             if (enemyLevel == 1)
             {
                 Instantiate(gem[1], transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+
+            if(enemyLevel == 2)
+            {
+                if (!respawnEnemyDied)
+                {
+                    respawnEnemyPos = transform.position;
+                    StartCoroutine(respawnEnemy());
+                    gameObject.GetComponent<Renderer>().enabled = false;
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                }
+
+                if (respawnEnemyDied)
+                {
+                    Instantiate(gem[1], transform.position, Quaternion.identity);
+                    Destroy(gameObject);
+                }
             }
 
             ScoreScript.instance.GainPoints(pointsGained);
-            Destroy(gameObject);
         }
+
+           
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -112,6 +134,7 @@ public class EnemyScript : MonoBehaviour
             }
         }
 
+        
 
         //if (healthPoints <= 0)
         //{
@@ -130,6 +153,14 @@ public class EnemyScript : MonoBehaviour
         //}
     }
 
-    
-    
+    IEnumerator respawnEnemy()
+    {
+        yield return new WaitForSeconds(0.4f);
+        gameObject.GetComponent<Renderer>().enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        healthPoints = 80;
+        respawnEnemyDied = true;
+        StopCoroutine(respawnEnemy());
+    }
+
 }

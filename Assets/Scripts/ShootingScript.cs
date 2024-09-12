@@ -10,10 +10,10 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] GameObject upgradeMenu;
     int bulletsShot = 0;
     int bulletCount = 4;
-    bool canshoot = true;
     float timer = 0;
     float reloadTime = 2f;
     int bulletAmountLevel = 0;
+    int reloadSpeedLevel = 0;
     
     
     // Start is called before the first frame update
@@ -67,6 +67,14 @@ public class ShootingScript : MonoBehaviour
         Time.timeScale = 1.0f;
         if(bulletAmountLevel == 1)
         bulletCount += 1;
+    }
+
+    public void ReloadSpeed()
+    {
+        reloadSpeedLevel += 1;
+        upgradeMenu.SetActive(false);
+        Time.timeScale = 1.0f;
+        reloadTime -= 0.5f;
     }
 }
 
