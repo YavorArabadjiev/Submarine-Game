@@ -12,15 +12,16 @@ public class EnemySpawning : MonoBehaviour
     float randomNumberX2;
     int randomEnemies;
    [SerializeField] int stagePhase = 1;
-     
+   [SerializeField] Vector2[] randomSpawnPos;
+    int randomSpawnCount;
     
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(enemySpawning());
-        spawnStrongerEnemies();
-      
+        StartCoroutine(spawnStrongerEnemies());
+        
     }
 
     // Update is called once per frame
@@ -29,6 +30,8 @@ public class EnemySpawning : MonoBehaviour
         randomNumberX = Random.Range(-9, 10);
         randomNumberX2 = Random.Range(-9, 10);
         randomEnemies = Random.Range(0, enemy.Length - 1);
+        
+        
     }
     IEnumerator enemySpawning()
     {
@@ -48,8 +51,16 @@ public class EnemySpawning : MonoBehaviour
     }
     IEnumerator spawnStrongerEnemies()
     {
-        yield return new WaitForSeconds(10f);
-        Instantiate(enemy[randomEnemies], new Vector2(randomNumberX, player.transform.position.y - 8f), Quaternion.identity);
+        while (true){
+            yield return new WaitForSeconds(15f);
+            randomSpawnPos[0] = new Vector2(randomNumberX, player.transform.position.y - 8f);
+            randomSpawnPos[1] = new Vector2(randomNumberX, player.transform.position.x - 14f);
+            randomSpawnPos[2] = new Vector2(randomNumberX2, player.transform.position.x + 14f);
+            randomSpawnPos[3] = new Vector2(randomNumberX2, player.transform.position.y + 8f);
+            randomSpawnCount = Random.Range(0, randomSpawnPos.Length);
+            Instantiate(enemy[2], randomSpawnPos[randomSpawnCount], Quaternion.identity);
+        }
+        
     }
 
     

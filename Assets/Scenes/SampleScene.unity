@@ -702,6 +702,11 @@ MonoBehaviour:
   - {fileID: 3375084156086431697, guid: 4f01181d63286d2489932c26c3dc8ff3, type: 3}
   - {fileID: 3375084156086431697, guid: 2c2cf99c1ee6a004181c4cb09628d877, type: 3}
   stagePhase: 1
+  randomSpawnPos:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
 --- !u!4 &323780292
 Transform:
   m_ObjectHideFlags: 0
