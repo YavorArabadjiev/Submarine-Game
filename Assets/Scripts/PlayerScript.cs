@@ -121,6 +121,7 @@ public class PlayerScript : MonoBehaviour
             speedButton.SetActive(false);
         }
         upgradeMenu.SetActive(false);
+        PowerUpDescText.instance.descObject.SetActive(false);
         Time.timeScale = 1;
     }
 }

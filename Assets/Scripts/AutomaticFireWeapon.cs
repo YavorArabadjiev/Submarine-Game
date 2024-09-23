@@ -9,7 +9,7 @@ public class AutomaticFireWeapon : MonoBehaviour
     float level = 0;
     [HideInInspector] public static AutomaticFireWeapon instance;
     public int autoWeaponShootPower = 25;
-
+    [SerializeField] GameObject autoBulletsButton;
     
     // Start is called before the first frame update
     void Start()
@@ -51,13 +51,15 @@ public class AutomaticFireWeapon : MonoBehaviour
         }
         ExperienceBar.instance.upgradeMenu.SetActive(false);
         Time.timeScale = 1f;
-        if(level == 2)
+        PowerUpDescText.instance.descObject.SetActive(false);
+        if (level == 2)
         {
             shootTime = 0.02f;
         }
         if(level == 3)
         {
             autoWeaponShootPower = 50;
+            autoBulletsButton.SetActive(false);
         }
     }
 

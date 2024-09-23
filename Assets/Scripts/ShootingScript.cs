@@ -8,6 +8,8 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] GameObject[] bullet;
     [SerializeField] int level = 1;
     [SerializeField] GameObject upgradeMenu;
+    [SerializeField] GameObject bulletAmountButton;
+    [SerializeField] GameObject reloadSpeedButton;
     int bulletsShot = 0;
     int bulletCount = 4;
     float timer = 0;
@@ -56,6 +58,7 @@ public class ShootingScript : MonoBehaviour
     public void BulletLevelUpgrade()
     {
         level += 1;
+        PowerUpDescText.instance.descObject.SetActive(false);
         upgradeMenu.SetActive(false);
         Time.timeScale = 1.0f;
     }
@@ -63,9 +66,13 @@ public class ShootingScript : MonoBehaviour
     public void BulletAmountUpgrade()
     {
         bulletAmountLevel += 1;
+        if (bulletAmountLevel == 9)
+        {
+            bulletAmountButton.SetActive(false);
+        }
         upgradeMenu.SetActive(false);
+        PowerUpDescText.instance.descObject.SetActive(false);
         Time.timeScale = 1.0f;
-        if(bulletAmountLevel == 1)
         bulletCount += 1;
     }
 
@@ -73,6 +80,11 @@ public class ShootingScript : MonoBehaviour
     {
         reloadSpeedLevel += 1;
         upgradeMenu.SetActive(false);
+        if (reloadSpeedLevel == 3)
+        {
+            reloadSpeedButton.SetActive(false);
+        }
+        PowerUpDescText.instance.descObject.SetActive(false);
         Time.timeScale = 1.0f;
         reloadTime -= 0.5f;
     }
