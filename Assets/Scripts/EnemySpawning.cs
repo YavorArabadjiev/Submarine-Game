@@ -13,14 +13,14 @@ public class EnemySpawning : MonoBehaviour
     int randomEnemies;
    [SerializeField] int stagePhase = 1;
    [SerializeField] Vector2[] randomSpawnPos;
-    int randomSpawnCount;
+    int randomSpawnRange;
     
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(enemySpawning());
-        StartCoroutine(spawnStrongerEnemies());
+        //StartCoroutine(spawnStrongerEnemies());
         
     }
 
@@ -40,10 +40,16 @@ public class EnemySpawning : MonoBehaviour
             while (true)
             {
                 yield return new WaitForSeconds(spawnTime);
-                Instantiate(enemy[randomEnemies], new Vector2(randomNumberX, player.transform.position.y - 8f), Quaternion.identity);
-                Instantiate(enemy[randomEnemies], new Vector2(randomNumberX, player.transform.position.x - 14f), Quaternion.identity);
-                Instantiate(enemy[randomEnemies], new Vector2(randomNumberX2, player.transform.position.x + 14f), Quaternion.identity);
-                Instantiate(enemy[randomEnemies], new Vector2(randomNumberX2, player.transform.position.y + 8f), Quaternion.identity);
+                //Instantiate(enemy[randomEnemies], new Vector2(randomNumberX, player.transform.position.y - 8f), Quaternion.identity);
+                //Instantiate(enemy[randomEnemies], new Vector2(randomNumberX, player.transform.position.x - 14f), Quaternion.identity);
+                //Instantiate(enemy[randomEnemies], new Vector2(randomNumberX2, player.transform.position.x + 14f), Quaternion.identity);
+                //Instantiate(enemy[randomEnemies], new Vector2(randomNumberX2, player.transform.position.y + 8f), Quaternion.identity);
+                randomSpawnPos[0] = new Vector2(randomNumberX, player.transform.position.y - 8f);
+                randomSpawnPos[1] = new Vector2(randomNumberX, player.transform.position.x - 14f);
+                randomSpawnPos[2] = new Vector2(randomNumberX2, player.transform.position.x + 14f);
+                randomSpawnPos[3] = new Vector2(randomNumberX2, player.transform.position.y + 8f);
+                randomSpawnRange = Random.Range(0, randomSpawnPos.Length);
+                Instantiate(enemy[randomEnemies], randomSpawnPos[randomSpawnRange], Quaternion.identity);
             }
         }
 
@@ -57,8 +63,8 @@ public class EnemySpawning : MonoBehaviour
             randomSpawnPos[1] = new Vector2(randomNumberX, player.transform.position.x - 14f);
             randomSpawnPos[2] = new Vector2(randomNumberX2, player.transform.position.x + 14f);
             randomSpawnPos[3] = new Vector2(randomNumberX2, player.transform.position.y + 8f);
-            randomSpawnCount = Random.Range(0, randomSpawnPos.Length);
-            Instantiate(enemy[2], randomSpawnPos[randomSpawnCount], Quaternion.identity);
+            randomSpawnRange = Random.Range(0, randomSpawnPos.Length);
+            Instantiate(enemy[2], randomSpawnPos[randomSpawnRange], Quaternion.identity);
         }
         
     }
