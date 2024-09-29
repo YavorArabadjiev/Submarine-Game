@@ -14,6 +14,8 @@ public class EnemySpawning : MonoBehaviour
    [SerializeField] int stagePhase = 1;
    [SerializeField] Vector2[] randomSpawnPos;
     int randomSpawnRange;
+   [SerializeField] float timeTillNextPhase = 30f;
+    float phaseTimeCounter;
     
     // Start is called before the first frame update
     void Start()
@@ -21,7 +23,7 @@ public class EnemySpawning : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(enemySpawning());
         //StartCoroutine(spawnStrongerEnemies());
-        
+        phaseTimeCounter = timeTillNextPhase;
     }
 
     // Update is called once per frame
@@ -30,7 +32,13 @@ public class EnemySpawning : MonoBehaviour
         randomNumberX = Random.Range(-9, 10);
         randomNumberX2 = Random.Range(-9, 10);
         randomEnemies = Random.Range(0, enemy.Length - 1);
-        
+        phaseTimeCounter -= Time.deltaTime;
+
+        if (phaseTimeCounter <= 0) 
+        {
+            stagePhase++;
+            phaseTimeCounter = timeTillNextPhase;
+        }
         
     }
     IEnumerator enemySpawning()
@@ -51,6 +59,10 @@ public class EnemySpawning : MonoBehaviour
                 randomSpawnRange = Random.Range(0, randomSpawnPos.Length);
                 Instantiate(enemy[randomEnemies], randomSpawnPos[randomSpawnRange], Quaternion.identity);
             }
+        }
+        if(stagePhase == 2)
+        {
+            print("wave 2");
         }
 
         
