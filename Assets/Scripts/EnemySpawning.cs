@@ -14,7 +14,7 @@ public class EnemySpawning : MonoBehaviour
    [SerializeField] int stagePhase = 1;
    [SerializeField] Vector2[] randomSpawnPos;
     int randomSpawnRange;
-   [SerializeField] float timeTillNextPhase = 30f;
+   [SerializeField] float timeTillNextPhase = 5f;
     float phaseTimeCounter;
     
     // Start is called before the first frame update
@@ -60,7 +60,7 @@ public class EnemySpawning : MonoBehaviour
                 Instantiate(enemy[randomEnemies], randomSpawnPos[randomSpawnRange], Quaternion.identity);
             }
         }
-        if(stagePhase == 2)
+        if(stagePhase >= 2)
         {
             print("wave 2");
         }
@@ -70,6 +70,7 @@ public class EnemySpawning : MonoBehaviour
     IEnumerator spawnStrongerEnemies()
     {
         while (true){
+            
             yield return new WaitForSeconds(15f);
             randomSpawnPos[0] = new Vector2(randomNumberX, player.transform.position.y - 8f);
             randomSpawnPos[1] = new Vector2(randomNumberX, player.transform.position.x - 14f);

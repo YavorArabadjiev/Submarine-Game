@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AutomaticFireWeapon : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class AutomaticFireWeapon : MonoBehaviour
     [HideInInspector] public static AutomaticFireWeapon instance;
     public int autoWeaponShootPower = 25;
     [SerializeField] GameObject autoBulletsButton;
+    [SerializeField] Sprite autoSpikesSprite;
+    bool isTaken;
     
     // Start is called before the first frame update
     void Start()
@@ -44,6 +47,18 @@ public class AutomaticFireWeapon : MonoBehaviour
 
     public void AutoBulletsButton()
     {
+        if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<Image>().sprite = autoSpikesSprite;
+            PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
+        else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = autoSpikesSprite;
+            PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
         level++;
         if(level == 1)
         {

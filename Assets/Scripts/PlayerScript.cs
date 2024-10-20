@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour
 {
 
@@ -22,7 +23,9 @@ public class PlayerScript : MonoBehaviour
     //[SerializeField] GameObject[] healthUI'
     [SerializeField] GameObject upgradeMenu;
     [SerializeField] GameObject speedButton;
+    [SerializeField] Sprite speedSprite;
     float speedLevel = 0;
+    bool isTaken = false;
     void Start()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
@@ -110,6 +113,18 @@ public class PlayerScript : MonoBehaviour
 
     public void SpeedUpButton()
     {
+        if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<Image>().sprite = speedSprite;
+            PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
+        else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = speedSprite;
+            PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
         speedLevel++;
         if(speedLevel == 1)
         {

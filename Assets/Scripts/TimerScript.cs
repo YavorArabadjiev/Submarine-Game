@@ -8,12 +8,12 @@ public class TimerScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerMinutes;
     [SerializeField] TextMeshProUGUI timerSeconds;
     [SerializeField] float currentTime;
-    float currentMinutes = 0f;
     [SerializeField] bool countDown;
+    [HideInInspector] public static TimerScript instance;
     // Start is called before the first frame update
     void Start()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class TimerScript : MonoBehaviour
 
         if (currentTime >= 10)
         {
-            currentTime = 0;
+            
         }
         timerSeconds.text = currentTime.ToString("0");
 
