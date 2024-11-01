@@ -26,6 +26,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] Sprite speedSprite;
     float speedLevel = 0;
     bool isTaken = false;
+    bool shieldPowerTaken = false;
+    [SerializeField] GameObject[] shieldUI;
+    int shieldHealth = 0;
     void Start()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
@@ -84,9 +87,26 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            if (shieldPowerTaken && shieldHealth != 0)
+            {
+                shieldHealth--;
+                
+            }
+            else
+            {
+                //healthPoints -= 1;
+            }
 
+            if(shieldHealth == 1)
+            {
+                shieldUI[0].SetActive(false);
+            }
 
-            //healthPoints -= 1;
+            if (shieldHealth == 0)
+            {
+                shieldUI[1].SetActive(false);
+            }
+
             Destroy(collision.gameObject);
             StartCoroutine(safeTime());
 
@@ -135,6 +155,17 @@ public class PlayerScript : MonoBehaviour
             moveSpeed += 2;
             speedButton.SetActive(false);
         }
+        upgradeMenu.SetActive(false);
+        PowerUpDescText.instance.descObject.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void ShieldPower()
+    {
+        shieldPowerTaken = true;
+        shieldHealth = 2;
+        shieldUI[0].SetActive(true);
+        shieldUI[1].SetActive(true);
         upgradeMenu.SetActive(false);
         PowerUpDescText.instance.descObject.SetActive(false);
         Time.timeScale = 1;

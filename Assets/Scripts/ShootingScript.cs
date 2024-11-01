@@ -9,7 +9,7 @@ public class ShootingScript : MonoBehaviour
 {
     [SerializeField] GameObject[] bullet;
     int level = 1;
-    [SerializeField] GameObject upgradeMenu;
+    public GameObject upgradeMenu;
     [SerializeField] GameObject bulletAmountButton;
     [SerializeField] GameObject reloadSpeedButton;
     int bulletsShot = 0;
@@ -22,12 +22,13 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] Sprite reloadSprite;
     [SerializeField] Sprite biggerBulletSprite;
     bool isTaken = false;
+    public static ShootingScript instance;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        //upgradeMenu = GameObject.FindGameObjectWithTag("UpgradeMenu");
+        instance = this;
     }
 
     
@@ -75,6 +76,18 @@ public class ShootingScript : MonoBehaviour
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
+        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = biggerBulletSprite;
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
+        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = biggerBulletSprite;
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
         level += 1;
         PowerUpDescText.instance.descObject.SetActive(false);
         upgradeMenu.SetActive(false);
@@ -91,9 +104,22 @@ public class ShootingScript : MonoBehaviour
         }
         else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
-            //PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().color = Color.red;
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = bulletAmountSprite;
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
+        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = bulletAmountSprite;
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
+        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = bulletAmountSprite;
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
         bulletAmountLevel += 1;
@@ -119,6 +145,18 @@ public class ShootingScript : MonoBehaviour
         {
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = reloadSprite;
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
+        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = reloadSprite;
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
+        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = reloadSprite;
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
         reloadSpeedLevel += 1;

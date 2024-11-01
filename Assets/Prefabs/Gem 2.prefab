@@ -136,3 +136,4 @@ MonoBehaviour:
   moveSpeed: 12
   xpPoints: 60
   distanceBetweenPlayer: 2
+  gemSprite: {fileID: 21300000, guid: efc8668bdd9035044a1177560702ccc7, type: 3}

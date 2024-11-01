@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     GameObject player;
     [SerializeField] GameObject[] gem;
     [SerializeField] float speed = 5f;
-    [SerializeField] int healthPoints = 50;
+    public int healthPoints = 50;
     //[SerializeField] int playerHealthPoints = 3;
     //[SerializeField] float playerSaveTimeSeconds = 1.5f;
     [SerializeField] int pointsGained = 5;
@@ -18,6 +18,7 @@ public class EnemyScript : MonoBehaviour
     Vector3 respawnEnemyPos;
     bool respawnEnemyDied = false;
     [SerializeField] GameObject respawningEnemy;
+    [HideInInspector] public static EnemyScript instance;
 
 
     private void Awake()
@@ -26,11 +27,13 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    //private void Start()
-    //{
-    //    scoreUI = GameObject.FindGameObjectWithTag("Score");
-    //    scoreText = scoreUI.GetComponent<TextMeshProUGUI>();
-    //}
+    private void Start()
+    {
+        //scoreUI = GameObject.FindGameObjectWithTag("Score");
+        //scoreText = scoreUI.GetComponent<TextMeshProUGUI>();
+
+        instance = this;
+    }
 
     // Update is called once per frame
     void FixedUpdate()
