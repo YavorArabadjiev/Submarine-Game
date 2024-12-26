@@ -35,8 +35,9 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Item Drop")
         {
+
             Destroy(gameObject);
         }
     }

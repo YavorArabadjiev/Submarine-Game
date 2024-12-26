@@ -11,7 +11,7 @@ public class PlayerScript : MonoBehaviour
     float yInput;
     [SerializeField] float moveSpeed = 4f;
     Vector3 moveVector;
-    //[SerializeField] int healthPoints = 3;
+    int healthPoints = 3;
     Rigidbody2D rb;
     [SerializeField] GameObject[] enemy;
     [SerializeField] float playerSaveTimeSeconds = 1.5f;
@@ -20,7 +20,7 @@ public class PlayerScript : MonoBehaviour
     private float playerpositionY;
     [SerializeField] float maxposX;
     [SerializeField] float maxposY;
-    //[SerializeField] GameObject[] healthUI'
+    [SerializeField] GameObject[] healthUI;
     [SerializeField] GameObject upgradeMenu;
     [SerializeField] GameObject speedButton;
     [SerializeField] Sprite speedSprite;
@@ -37,23 +37,25 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        //if(healthPoints == 2) 
-        //{
-        //    healthUI[2].SetActive(false);
-        //}
+       
 
-        //if (healthPoints == 1)
-        //{
-        //    healthUI[1].SetActive(false);
-        //}
+        if (healthPoints == 2)
+        {
+            healthUI[2].SetActive(false);
+        }
 
-        //if (healthPoints <= 0)
-        //{
-        //    healthUI[0].SetActive(false);
-        //    gameObject.transform.DetachChildren();
-        //    gameOverMenu.SetActive(true);
-        //    Destroy(gameObject);
-        //}
+        if (healthPoints == 1)
+        {
+            healthUI[1].SetActive(false);
+        }
+
+        if (healthPoints <= 0)
+        {
+            healthUI[0].SetActive(false);
+            gameObject.transform.DetachChildren();
+            gameOverMenu.SetActive(true);
+            Destroy(gameObject);
+        }
 
         ClampPlayer();
     }
@@ -94,7 +96,7 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                //healthPoints -= 1;
+                healthPoints -= 1;
             }
 
             if(shieldHealth == 1)
@@ -115,12 +117,24 @@ public class PlayerScript : MonoBehaviour
 
                 if (collision.gameObject.tag == "Enemy")
                 {
-                    //healthPoints -= 0;
+                    healthPoints -= 0;
                 }
                 yield return new WaitForSeconds(playerSaveTimeSeconds);
             }
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Heart")
+        {
+            //    if (healthPoints < 3)
+            //    {
+            //        healthPoints++;
+            //    }
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)

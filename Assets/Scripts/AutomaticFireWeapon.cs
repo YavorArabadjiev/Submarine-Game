@@ -34,10 +34,14 @@ public class AutomaticFireWeapon : MonoBehaviour
         {
             yield return new WaitForSeconds(shootTime);
             
+            if(player != null)
+            {
                 Instantiate(autoPellets[0], new Vector2(player.transform.position.x, player.transform.position.y + 1), Quaternion.identity);
                 Instantiate(autoPellets[1], new Vector2(player.transform.position.x, player.transform.position.y - 1), Quaternion.identity);
                 Instantiate(autoPellets[2], new Vector2(player.transform.position.x + 1, player.transform.position.y), Quaternion.identity);
                 Instantiate(autoPellets[3], new Vector2(player.transform.position.x - 1, player.transform.position.y), Quaternion.identity);
+            }
+                
 
             yield return new WaitForSeconds(1f);
 

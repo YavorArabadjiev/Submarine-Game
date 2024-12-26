@@ -69,5 +69,7 @@ public class PoisonAreaScript : MonoBehaviour
         level++;
         gameObject.SetActive(true);
         ShootingScript.instance.upgradeMenu.SetActive(false);
+        PowerUpDescText.instance.descObject.SetActive(false);
+        Time.timeScale = 1;
     }
 }

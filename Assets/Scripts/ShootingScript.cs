@@ -23,6 +23,8 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] Sprite biggerBulletSprite;
     bool isTaken = false;
     public static ShootingScript instance;
+    int numberOfBulletsUI = 4;
+    [SerializeField] GameObject[] bulletsUI;
     
     
     // Start is called before the first frame update
@@ -50,12 +52,39 @@ public class ShootingScript : MonoBehaviour
                 
         }
 
-        if(bulletsShot >= bulletCount)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            numberOfBulletsUI--;
+            if (numberOfBulletsUI == 3)
+            {
+                bulletsUI[0].SetActive(false);
+            }
+            if (numberOfBulletsUI == 2)
+            {
+                bulletsUI[1].SetActive(false);
+            }
+
+            if (numberOfBulletsUI == 1)
+            {
+                bulletsUI[2].SetActive(false);
+            }
+
+            if (numberOfBulletsUI == 0)
+            {
+                bulletsUI[3].SetActive(false);
+            }
+        }
+        if (bulletsShot >= bulletCount)
         {
             timer += Time.deltaTime;
             if(timer > reloadTime)
             {
                 bulletsShot = 0;
+                foreach(GameObject bullet in bulletsUI)
+                {
+                    bullet.SetActive(true);
+                }
+                numberOfBulletsUI = 4;
                 timer = 0;
             }
         }

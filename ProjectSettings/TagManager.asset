@@ -13,6 +13,8 @@ TagManager:
   - Score
   - Auto Bullet
   - PowerUpDesc
+  - Item Drop
+  - Heart
   layers:
   - Default
   - TransparentFX
@@ -49,4 +51,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BulletUI
+    uniqueID: 974653451
     locked: 0

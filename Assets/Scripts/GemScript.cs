@@ -25,8 +25,12 @@ public class GemScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Vector2.Distance(player.transform.position, gameObject.transform.position) <= distanceBetweenPlayer)
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+        if(player != null)
+        {
+            if (Vector2.Distance(player.transform.position, gameObject.transform.position) <= distanceBetweenPlayer)
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+        }
+        
 
     }
 
