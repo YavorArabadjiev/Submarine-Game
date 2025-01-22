@@ -67,6 +67,10 @@ public class PoisonAreaScript : MonoBehaviour
             isTaken = true;
         }
         level++;
+        if(level == 2)
+        {
+            gameObject.transform.localScale = new Vector2(4f, 4f);
+        }
         gameObject.SetActive(true);
         ShootingScript.instance.upgradeMenu.SetActive(false);
         PowerUpDescText.instance.descObject.SetActive(false);

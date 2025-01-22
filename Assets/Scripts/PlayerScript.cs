@@ -1,12 +1,8 @@
 using System.Collections;
 using UnityEngine;
-using TMPro;
-using System;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour
 {
-
     float xInput;
     float yInput;
     [SerializeField] float moveSpeed = 4f;
@@ -24,6 +20,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject upgradeMenu;
     [SerializeField] GameObject speedButton;
     [SerializeField] Sprite speedSprite;
+    [SerializeField] Sprite shieldSprite;
     float speedLevel = 0;
     bool isTaken = false;
     bool shieldPowerTaken = false;
@@ -37,8 +34,6 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-       
-
         if (healthPoints == 2)
         {
             healthUI[2].SetActive(false);
@@ -58,11 +53,6 @@ public class PlayerScript : MonoBehaviour
         }
 
         ClampPlayer();
-    }
-
-    public void GameOverMenu()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void FixedUpdate()
@@ -89,7 +79,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            if (shieldPowerTaken && shieldHealth != 0)
+            if (shieldHealth != 0)
             {
                 shieldHealth--;
                 
@@ -98,6 +88,7 @@ public class PlayerScript : MonoBehaviour
             {
                 healthPoints -= 1;
             }
+            
 
             if(shieldHealth == 1)
             {
@@ -107,6 +98,10 @@ public class PlayerScript : MonoBehaviour
             if (shieldHealth == 0)
             {
                 shieldUI[1].SetActive(false);
+            }
+            else
+            {
+                shieldUI[1].SetActive(true);
             }
 
             Destroy(collision.gameObject);
@@ -129,10 +124,38 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Heart")
         {
-            //    if (healthPoints < 3)
-            //    {
-            //        healthPoints++;
-            //    }
+                if (healthPoints < 3)
+                {
+                    healthPoints++;
+                }
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Shield")
+        {
+            if (shieldHealth < 2)
+            {
+                shieldHealth++;
+                if (shieldHealth == 1)
+                {
+                    if (shieldUI[1].activeSelf)
+                        shieldUI[1].SetActive(false);
+                }
+                else
+                {
+                    shieldUI[1].SetActive(true);
+                }
+                if (shieldHealth == 2)
+                {
+                    if (shieldUI[2].activeSelf)
+                        shieldUI[1].SetActive(false);
+                }
+                else
+                {
+                    shieldUI[1].SetActive(true);
+                }
+            }
+            
             Destroy(collision.gameObject);
         }
     }
@@ -159,6 +182,19 @@ public class PlayerScript : MonoBehaviour
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
+        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = speedSprite;
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
+
+        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = speedSprite;
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
         speedLevel++;
         if(speedLevel == 1)
         {
@@ -176,7 +212,32 @@ public class PlayerScript : MonoBehaviour
 
     public void ShieldPower()
     {
-        shieldPowerTaken = true;
+        if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<Image>().sprite = shieldSprite;
+            PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
+            shieldPowerTaken = true;
+        }
+        else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = shieldSprite;
+            PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
+            shieldPowerTaken = true;
+        }
+
+        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = shieldSprite;
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
+            shieldPowerTaken = true;
+        }
+
+        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = shieldSprite;
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
+            shieldPowerTaken = true;
+        }
         shieldHealth = 2;
         shieldUI[0].SetActive(true);
         shieldUI[1].SetActive(true);

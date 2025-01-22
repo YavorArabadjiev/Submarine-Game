@@ -63,6 +63,20 @@ public class AutomaticFireWeapon : MonoBehaviour
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
+
+        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = autoSpikesSprite;
+            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
+
+        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        {
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = autoSpikesSprite;
+            PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
+            isTaken = true;
+        }
         level++;
         if(level == 1)
         {

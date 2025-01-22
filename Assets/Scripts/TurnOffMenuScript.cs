@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TurnOffMenuScript : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class TurnOffMenuScript : MonoBehaviour
             pauseMenu.SetActive(true);
             Time.timeScale = 0;
         }
+    }
+
+    public void GameOverMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void QuitGame()

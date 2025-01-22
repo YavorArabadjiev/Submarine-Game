@@ -12,7 +12,7 @@ public class GemScript : MonoBehaviour
     ExperienceBar experienceBar;
     int gemUpgradeLevel = 0;
     [SerializeField] Sprite gemSprite;
-    bool isTaken = false;
+    //bool isTaken = false;
   
 
     // Start is called before the first frame update
@@ -46,24 +46,24 @@ public class GemScript : MonoBehaviour
     public void GemUpgradeButton()
     {
         gemUpgradeLevel++;
-        if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
-        {
-            PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<Image>().sprite = gemSprite;
-            PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
-            isTaken = true;
-        }
-        else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
-        {
-            PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = gemSprite;
-            PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
-            isTaken = true;
-        }
-        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
-        {
-            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = gemSprite;
-            PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
-            isTaken = true;
-        }
+        //if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        //{
+        //    PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<Image>().sprite = gemSprite;
+        //    PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
+        //    isTaken = true;
+        //}
+        //else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        //{
+        //    PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = gemSprite;
+        //    PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
+        //    isTaken = true;
+        //}
+        //else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        //{
+        //    PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = gemSprite;
+        //    PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
+        //    isTaken = true;
+        //}
         
 
         if (gemUpgradeLevel <= 3)

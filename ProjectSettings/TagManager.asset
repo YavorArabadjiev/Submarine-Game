@@ -15,6 +15,7 @@ TagManager:
   - PowerUpDesc
   - Item Drop
   - Heart
+  - Shield
   layers:
   - Default
   - TransparentFX

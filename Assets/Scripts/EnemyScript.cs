@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] GameObject[] gem;
     [SerializeField] float speed = 5f;
     public int healthPoints = 50;
+    int randomNumber;
     //[SerializeField] int playerHealthPoints = 3;
     //[SerializeField] float playerSaveTimeSeconds = 1.5f;
     [SerializeField] int pointsGained = 5;
@@ -17,8 +18,9 @@ public class EnemyScript : MonoBehaviour
     Rigidbody2D rb;
     Vector3 respawnEnemyPos;
     bool respawnEnemyDied = false;
-    [SerializeField] GameObject respawningEnemy;
+    //[SerializeField] GameObject respawningEnemy;
     [HideInInspector] public static EnemyScript instance;
+    [SerializeField] GameObject shieldPickUp;
 
 
     private void Awake()
@@ -58,13 +60,30 @@ public class EnemyScript : MonoBehaviour
         {
             if (enemyLevel == 0)
             {
-                Instantiate(gem[0], transform.position, Quaternion.identity);
+                randomNumber = Random.Range(0, 6);
+                if (randomNumber == 1)
+                {
+                    Instantiate(shieldPickUp, transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(gem[0], transform.position, Quaternion.identity);
+                }
+                
                 Destroy(gameObject);
             }
 
             if (enemyLevel == 1)
             {
-                Instantiate(gem[1], transform.position, Quaternion.identity);
+                randomNumber = Random.Range(0, 6);
+                if (randomNumber == 1)
+                {
+                    Instantiate(shieldPickUp, transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(gem[1], transform.position, Quaternion.identity);
+                }
                 Destroy(gameObject);
             }
 

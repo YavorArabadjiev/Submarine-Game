@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,11 +41,17 @@ public class ShootingScript : MonoBehaviour
         }
         if(level >= 2)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && bulletsShot < bulletCount)
             {
+                bulletsShot++;
                 Instantiate(bullet[1], transform.position, Quaternion.identity);
             }
                 
+        }
+
+        if (level >= 3)
+        {
+            Instantiate(bullet[2], transform.position, Quaternion.identity);
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))

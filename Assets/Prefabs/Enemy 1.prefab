@@ -107,7 +107,7 @@ MonoBehaviour:
   pointsGained: 10
   enemyLevel: 1
   knockbackPower: 0.8
-  respawningEnemy: {fileID: 3375084156086431697, guid: 2c2cf99c1ee6a004181c4cb09628d877, type: 3}
+  shieldPickUp: {fileID: 621226940687204629, guid: acd0d43fa0c9eb9448d635447e8f5b95, type: 3}
 --- !u!61 &3463852933948277334
 BoxCollider2D:
   m_ObjectHideFlags: 0
