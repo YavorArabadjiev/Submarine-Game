@@ -53,12 +53,14 @@ public class AutomaticFireWeapon : MonoBehaviour
     {
         if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[0].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<Image>().sprite = autoSpikesSprite;
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
         else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[1].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = autoSpikesSprite;
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
@@ -66,6 +68,7 @@ public class AutomaticFireWeapon : MonoBehaviour
 
         else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[2].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = autoSpikesSprite;
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
@@ -73,6 +76,7 @@ public class AutomaticFireWeapon : MonoBehaviour
 
         else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[3].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = autoSpikesSprite;
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
@@ -87,9 +91,14 @@ public class AutomaticFireWeapon : MonoBehaviour
         PowerUpDescText.instance.descObject.SetActive(false);
         if (level == 2)
         {
-            shootTime = 0.02f;
+            shootTime = 3f;
         }
-        if(level == 3)
+
+        if (level == 3)
+        {
+            shootTime = 1f;
+        }
+        if(level == 4)
         {
             autoWeaponShootPower = 50;
             autoBulletsButton.SetActive(false);

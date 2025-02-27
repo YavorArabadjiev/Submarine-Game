@@ -99,7 +99,7 @@ public class EnemyScript : MonoBehaviour
 
                 if (respawnEnemyDied)
                 {
-                    Instantiate(gem[2], transform.position, Quaternion.identity);
+                    Instantiate(gem[1], transform.position, Quaternion.identity);
                     Destroy(gameObject);
                 }
             }

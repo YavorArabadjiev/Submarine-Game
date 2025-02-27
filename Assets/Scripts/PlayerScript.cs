@@ -26,6 +26,7 @@ public class PlayerScript : MonoBehaviour
     bool shieldPowerTaken = false;
     [SerializeField] GameObject[] shieldUI;
     int shieldHealth = 0;
+    [SerializeField] Sprite deadHeart;
     void Start()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
@@ -36,17 +37,17 @@ public class PlayerScript : MonoBehaviour
     {
         if (healthPoints == 2)
         {
-            healthUI[2].SetActive(false);
+            healthUI[2].GetComponent<Image>().sprite = deadHeart; 
         }
 
         if (healthPoints == 1)
         {
-            healthUI[1].SetActive(false);
+            healthUI[1].GetComponent<Image>().sprite = deadHeart;
         }
 
         if (healthPoints <= 0)
         {
-            healthUI[0].SetActive(false);
+            healthUI[0].GetComponent<Image>().sprite = deadHeart;
             gameObject.transform.DetachChildren();
             gameOverMenu.SetActive(true);
             Destroy(gameObject);
@@ -172,18 +173,21 @@ public class PlayerScript : MonoBehaviour
     {
         if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[0].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<Image>().sprite = speedSprite;
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
         else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[1].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = speedSprite;
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
         else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[2].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = speedSprite;
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
@@ -191,6 +195,7 @@ public class PlayerScript : MonoBehaviour
 
         else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[3].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = speedSprite;
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
@@ -214,12 +219,14 @@ public class PlayerScript : MonoBehaviour
     {
         if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[0].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<Image>().sprite = shieldSprite;
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
             shieldPowerTaken = true;
         }
         else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[1].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = shieldSprite;
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
             shieldPowerTaken = true;
@@ -227,6 +234,7 @@ public class PlayerScript : MonoBehaviour
 
         else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[2].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = shieldSprite;
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
             shieldPowerTaken = true;
@@ -234,6 +242,7 @@ public class PlayerScript : MonoBehaviour
 
         else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
         {
+            PowerUpBoxes.instance.powerUpBoxes[3].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = shieldSprite;
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
             shieldPowerTaken = true;

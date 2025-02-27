@@ -7,7 +7,7 @@ public class ExperienceBar : MonoBehaviour
 
    public float currentXp = 0f;
    [SerializeField] private float maxXp = 100f;
-   [SerializeField] private int level = 0;
+   public int level = 0;
    [SerializeField] private Image XpBar;
    [SerializeField] TextMeshProUGUI levelText;
    [SerializeField] public GameObject upgradeMenu;
