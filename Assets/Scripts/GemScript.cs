@@ -1,7 +1,5 @@
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GemScript : MonoBehaviour
 {
@@ -12,8 +10,9 @@ public class GemScript : MonoBehaviour
     ExperienceBar experienceBar;
     int gemUpgradeLevel = 0;
     [SerializeField] Sprite gemSprite;
+    //[SerializeField] TextMeshProUGUI gemUpgradeText;
     //bool isTaken = false;
-  
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +45,7 @@ public class GemScript : MonoBehaviour
     public void GemUpgradeButton()
     {
         gemUpgradeLevel++;
+        //gemUpgradeText.text = "Gem Upgrade L" + gemUpgradeLevel;
         //if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
         //{
         //    PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<Image>().sprite = gemSprite;

@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,8 @@ public class AutomaticFireWeapon : MonoBehaviour
     [SerializeField] GameObject autoBulletsButton;
     [SerializeField] Sprite autoSpikesSprite;
     bool isTaken;
-    
+    [SerializeField] TextMeshProUGUI automaticFireWeaponText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,6 +84,7 @@ public class AutomaticFireWeapon : MonoBehaviour
             isTaken = true;
         }
         level++;
+        automaticFireWeaponText.text = "Auto Spikes L" + level;
         if(level == 1)
         {
             StartCoroutine(autoShoot());

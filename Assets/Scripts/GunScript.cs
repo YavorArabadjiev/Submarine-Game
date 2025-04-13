@@ -4,12 +4,6 @@ public class GunScript : MonoBehaviour
 {
     Vector3 camVector;
     [SerializeField] Camera cam;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

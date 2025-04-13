@@ -1,8 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using TMPro;
-using Unity.VisualScripting;
-
 public class EnemyScript : MonoBehaviour
 {
     GameObject player;
@@ -137,7 +134,12 @@ public class EnemyScript : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.tag == "AutoBullet")
+        if (collision.gameObject.tag == "Creature")
+        {
+            healthPoints -= healthPoints;
+        }
+
+            if (collision.gameObject.tag == "AutoBullet")
         {
             healthPoints -= AutomaticFireWeapon.instance.autoWeaponShootPower;
 

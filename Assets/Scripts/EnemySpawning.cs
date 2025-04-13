@@ -9,10 +9,12 @@ public class EnemySpawning : MonoBehaviour
     [SerializeField] GameObject bossEnemy;
     float randomNumberX;
     float randomNumberX2;
-    int randomEnemies;
-    [SerializeField] int stagePhase = 1;
+    int randomEnemies1;
+    int randomEnemies2;
     [SerializeField] Vector2[] randomSpawnPos;
     int randomSpawnRange;
+    bool reduceBossSpawn;
+    float bossSpawnTime = 30f;
     //[SerializeField] float timeTillNextPhase = 5f;
     
     
@@ -33,8 +35,9 @@ public class EnemySpawning : MonoBehaviour
     {
         randomNumberX = Random.Range(-9, 10);
         randomNumberX2 = Random.Range(-9, 10);
-        randomEnemies = Random.Range(0, enemy.Length);
-        
+        randomEnemies1 = Random.Range(0, 2);
+        randomEnemies2 = Random.Range(0, enemy.Length + 1);
+
     }
     IEnumerator enemySpawning1()
     {
@@ -59,7 +62,7 @@ public class EnemySpawning : MonoBehaviour
 
                 if(ExperienceBar.instance.level == 4)
                 {
-                    StartCoroutine(enemyspawning2());
+                    StartCoroutine(enemySpawning2());
                     StopCoroutine(enemySpawning1());
                 }
             }
@@ -68,14 +71,14 @@ public class EnemySpawning : MonoBehaviour
 
 
     }
-    IEnumerator enemyspawning2()
+    IEnumerator enemySpawning2()
     {
 
            
             while (true)
             {
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(spawnTime);
                 if(player != null)
                 {
                     randomSpawnPos[0] = new Vector2(randomNumberX, player.transform.position.y - 8f);
@@ -85,18 +88,43 @@ public class EnemySpawning : MonoBehaviour
                 }
                 
                 randomSpawnRange = Random.Range(0, randomSpawnPos.Length);
-                Instantiate(enemy[randomEnemies], randomSpawnPos[randomSpawnRange], Quaternion.identity);
+                Instantiate(enemy[randomEnemies1], randomSpawnPos[randomSpawnRange], Quaternion.identity);
+
+            if (ExperienceBar.instance.level == 8)
+            {
+                StartCoroutine(enemySpawning3());
+                StopCoroutine(enemySpawning2());
             }
+        }
+    }
+
+    IEnumerator enemySpawning3()
+    {
+        reduceBossSpawn = true;
+        while (true)
+        {
+            yield return new WaitForSeconds(1.5f);
+            if (player != null)
+            {
+                randomSpawnPos[0] = new Vector2(randomNumberX, player.transform.position.y - 8f);
+                randomSpawnPos[1] = new Vector2(randomNumberX, player.transform.position.x - 14f);
+                randomSpawnPos[2] = new Vector2(randomNumberX2, player.transform.position.x + 14f);
+                randomSpawnPos[3] = new Vector2(randomNumberX2, player.transform.position.y + 8f);
+            }
+
+            randomSpawnRange = Random.Range(0, randomSpawnPos.Length);
+            Instantiate(enemy[randomEnemies1], randomSpawnPos[randomSpawnRange], Quaternion.identity);
+
+        }
     }
        
 
     IEnumerator bossSpawning()
     {
-        if (stagePhase == 1)
-        {
+            
             while (true)
             {
-                yield return new WaitForSeconds(30f);
+                yield return new WaitForSeconds(bossSpawnTime);
                 //Instantiate(enemy[randomEnemies], new Vector2(randomNumberX, player.transform.position.y - 8f), Quaternion.identity);
                 //Instantiate(enemy[randomEnemies], new Vector2(randomNumberX, player.transform.position.x - 14f), Quaternion.identity);
                 //Instantiate(enemy[randomEnemies], new Vector2(randomNumberX2, player.transform.position.x + 14f), Quaternion.identity);
@@ -107,7 +135,14 @@ public class EnemySpawning : MonoBehaviour
                 randomSpawnPos[3] = new Vector2(randomNumberX2, player.transform.position.y + 8f);
                 randomSpawnRange = Random.Range(0, randomSpawnPos.Length);
                 Instantiate(bossEnemy, randomSpawnPos[randomSpawnRange], Quaternion.identity);
+
+                if (reduceBossSpawn)
+                {
+                    bossSpawnTime = bossSpawnTime - 10f;
+                }
             }
-        }
     }
+    
 }
+
+

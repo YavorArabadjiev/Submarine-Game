@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class PoisonAreaScript : MonoBehaviour
     bool isTaken;
     [SerializeField] Sprite poisonAreaSprite;
     int damage = 3;
+    [SerializeField] TextMeshProUGUI poisonGasText;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +72,7 @@ public class PoisonAreaScript : MonoBehaviour
             isTaken = true;
         }
         level++;
+        poisonGasText.text = "Poison Gas L" + level;
         if(level == 2)
         {
             gameObject.transform.localScale = new Vector2(3.8f, 3.8f);

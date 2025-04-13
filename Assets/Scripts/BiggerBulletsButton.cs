@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,18 +13,4 @@ public class BiggerBulletsButton : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         PowerUpDescText.instance.descObject.SetActive(false);   
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-   
 }

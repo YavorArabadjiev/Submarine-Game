@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,8 +23,11 @@ public class ShootingScript : MonoBehaviour
     int numberOfBulletsUI = 5;
     [SerializeField] GameObject[] bulletsUI;
     bool reload = false;
-    
-    
+    [SerializeField] TextMeshProUGUI biggerBulletsText;
+    [SerializeField] TextMeshProUGUI bulletAmountText;
+    [SerializeField] TextMeshProUGUI reloadSpeedText;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -139,7 +143,9 @@ public class ShootingScript : MonoBehaviour
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
+        
         level += 1;
+        biggerBulletsText.text = "Make Bullets Bigger L" + level;
         PowerUpDescText.instance.descObject.SetActive(false);
         upgradeMenu.SetActive(false);
         Time.timeScale = 1.0f;
@@ -176,6 +182,7 @@ public class ShootingScript : MonoBehaviour
             isTaken = true;
         }
         bulletAmountLevel += 1;
+        bulletAmountText.text = "Make Bullets Bigger L" + bulletAmountLevel;
         if (bulletAmountLevel == 9)
         {
             bulletAmountButton.SetActive(false);
@@ -218,6 +225,7 @@ public class ShootingScript : MonoBehaviour
             isTaken = true;
         }
         reloadSpeedLevel += 1;
+        reloadSpeedText.text = "Reload Speed" + reloadSpeedLevel;
         upgradeMenu.SetActive(false);
         if (reloadSpeedLevel == 3)
         {

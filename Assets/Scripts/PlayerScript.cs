@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour
@@ -27,6 +28,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject[] shieldUI;
     int shieldHealth = 0;
     [SerializeField] Sprite deadHeart;
+    [SerializeField] TextMeshProUGUI speedUpText;
+    
     void Start()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
@@ -137,24 +140,32 @@ public class PlayerScript : MonoBehaviour
             if (shieldHealth < 2)
             {
                 shieldHealth++;
-                if (shieldHealth == 1)
-                {
-                    if (shieldUI[1].activeSelf)
-                        shieldUI[1].SetActive(false);
-                }
-                else
+                if(shieldHealth == 1)
                 {
                     shieldUI[1].SetActive(true);
                 }
-                if (shieldHealth == 2)
+                if(shieldHealth == 2)
                 {
-                    if (shieldUI[2].activeSelf)
-                        shieldUI[1].SetActive(false);
+                    shieldUI[0].SetActive(true);
                 }
-                else
-                {
-                    shieldUI[1].SetActive(true);
-                }
+                //if (shieldHealth == 1)
+                //{
+                //    if (shieldUI[1].activeSelf)
+                //        shieldUI[1].SetActive(false);
+                //}
+                //else
+                //{
+                //    shieldUI[1].SetActive(true);
+                //}
+                //if (shieldHealth == 2)
+                //{
+                //    if (shieldUI[0].activeSelf)
+                //        shieldUI[0].SetActive(false);
+                //}
+                //else
+                //{
+                //    shieldUI[0].SetActive(true);
+                //}
             }
             
             Destroy(collision.gameObject);
@@ -201,6 +212,7 @@ public class PlayerScript : MonoBehaviour
             isTaken = true;
         }
         speedLevel++;
+        speedUpText.text = "Player Speed Up L" + speedLevel;
         if(speedLevel == 1)
         {
             moveSpeed += 1;
