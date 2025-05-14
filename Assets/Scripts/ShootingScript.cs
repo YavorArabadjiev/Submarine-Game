@@ -34,7 +34,7 @@ public class ShootingScript : MonoBehaviour
         instance = this;
     }
 
-    
+   
 
     // Update is called once per frame
     void Update()
@@ -149,6 +149,7 @@ public class ShootingScript : MonoBehaviour
         PowerUpDescText.instance.descObject.SetActive(false);
         upgradeMenu.SetActive(false);
         Time.timeScale = 1.0f;
+        ButtonSoundScript.instance.pickUpPowerUpSound.Play();
     }
 
     public void BulletAmountUpgrade()
@@ -192,6 +193,7 @@ public class ShootingScript : MonoBehaviour
         Time.timeScale = 1.0f;
         bulletCount += 1;
         numberOfBulletsUI += 1;
+        ButtonSoundScript.instance.pickUpPowerUpSound.Play();
     }
 
     public void ReloadSpeed()
@@ -234,6 +236,7 @@ public class ShootingScript : MonoBehaviour
         PowerUpDescText.instance.descObject.SetActive(false);
         Time.timeScale = 1.0f;
         reloadTime -= 0.5f;
+        ButtonSoundScript.instance.pickUpPowerUpSound.Play();
     }
 }
 

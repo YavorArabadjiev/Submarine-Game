@@ -92,6 +92,7 @@ public class AutomaticFireWeapon : MonoBehaviour
         ExperienceBar.instance.upgradeMenu.SetActive(false);
         Time.timeScale = 1f;
         PowerUpDescText.instance.descObject.SetActive(false);
+        ButtonSoundScript.instance.pickUpPowerUpSound.Play();
         if (level == 2)
         {
             shootTime = 3f;

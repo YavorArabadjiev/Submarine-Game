@@ -14,11 +14,13 @@ public class PoisonAreaScript : MonoBehaviour
     [SerializeField] Sprite poisonAreaSprite;
     int damage = 3;
     [SerializeField] TextMeshProUGUI poisonGasText;
+
+
+    
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+    
+    
 
     // Update is called once per frame
     void Update()
@@ -45,6 +47,7 @@ public class PoisonAreaScript : MonoBehaviour
 
     public void PoisonGasButton()
     {
+
         if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {   PowerUpBoxes.instance.powerUpBoxes[0].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<Image>().sprite = poisonAreaSprite;
@@ -86,5 +89,6 @@ public class PoisonAreaScript : MonoBehaviour
         ShootingScript.instance.upgradeMenu.SetActive(false);
         PowerUpDescText.instance.descObject.SetActive(false);
         Time.timeScale = 1;
+        ButtonSoundScript.instance.pickUpPowerUpSound.Play();
     }
 }

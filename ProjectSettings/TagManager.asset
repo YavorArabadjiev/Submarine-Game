@@ -17,6 +17,8 @@ TagManager:
   - Heart
   - Shield
   - Creature
+  - Player Side
+  - PickUpSound
   layers:
   - Default
   - TransparentFX

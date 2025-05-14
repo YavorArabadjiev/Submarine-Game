@@ -39,5 +39,7 @@ public class CreaturePowerUp : MonoBehaviour
     {
         if (player != null && level == 2)
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+
+       
     }
 }

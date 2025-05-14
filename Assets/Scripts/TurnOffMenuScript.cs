@@ -13,6 +13,7 @@ public class TurnOffMenuScript : MonoBehaviour
         upgradeMenu.SetActive(false);
         PowerUpDescText.instance.descObject.SetActive(false);
         Time.timeScale = 1;
+        ButtonSoundScript.instance.pickUpPowerUpSound.Play();
     }
 
     private void Update()

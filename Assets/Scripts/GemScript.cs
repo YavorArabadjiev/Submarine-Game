@@ -45,6 +45,7 @@ public class GemScript : MonoBehaviour
     public void GemUpgradeButton()
     {
         gemUpgradeLevel++;
+        ButtonSoundScript.instance.pickUpPowerUpSound.Play();
         //gemUpgradeText.text = "Gem Upgrade L" + gemUpgradeLevel;
         //if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
         //{
@@ -64,7 +65,7 @@ public class GemScript : MonoBehaviour
         //    PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
         //    isTaken = true;
         //}
-        
+
 
         if (gemUpgradeLevel <= 3)
         {

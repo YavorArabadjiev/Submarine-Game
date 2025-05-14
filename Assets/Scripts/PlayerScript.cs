@@ -29,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     int shieldHealth = 0;
     [SerializeField] Sprite deadHeart;
     [SerializeField] TextMeshProUGUI speedUpText;
+    [SerializeField] AudioSource shieldPickup;
     
     void Start()
     {
@@ -62,6 +63,14 @@ public class PlayerScript : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
     }
 
     private void ClampPlayer()
@@ -137,6 +146,10 @@ public class PlayerScript : MonoBehaviour
 
         if (collision.gameObject.tag == "Shield")
         {
+            if (!shieldPickup.isPlaying)
+            {
+                shieldPickup.Play();
+            }
             if (shieldHealth < 2)
             {
                 shieldHealth++;
@@ -224,6 +237,7 @@ public class PlayerScript : MonoBehaviour
         }
         upgradeMenu.SetActive(false);
         PowerUpDescText.instance.descObject.SetActive(false);
+        ButtonSoundScript.instance.pickUpPowerUpSound.Play();
         Time.timeScale = 1;
     }
 
@@ -265,5 +279,6 @@ public class PlayerScript : MonoBehaviour
         upgradeMenu.SetActive(false);
         PowerUpDescText.instance.descObject.SetActive(false);
         Time.timeScale = 1;
+        ButtonSoundScript.instance.pickUpPowerUpSound.Play();
     }
 }

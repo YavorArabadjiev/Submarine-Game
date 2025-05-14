@@ -60,7 +60,7 @@ public class EnemySpawning : MonoBehaviour
                 randomSpawnRange = Random.Range(0, randomSpawnPos.Length);
                 Instantiate(enemy[0], randomSpawnPos[randomSpawnRange], Quaternion.identity);
 
-                if(ExperienceBar.instance.level == 4)
+                if(ExperienceBar.instance.level == 3)
                 {
                     StartCoroutine(enemySpawning2());
                     StopCoroutine(enemySpawning1());
@@ -90,7 +90,7 @@ public class EnemySpawning : MonoBehaviour
                 randomSpawnRange = Random.Range(0, randomSpawnPos.Length);
                 Instantiate(enemy[randomEnemies1], randomSpawnPos[randomSpawnRange], Quaternion.identity);
 
-            if (ExperienceBar.instance.level == 8)
+            if (ExperienceBar.instance.level == 5)
             {
                 StartCoroutine(enemySpawning3());
                 StopCoroutine(enemySpawning2());

@@ -7,8 +7,6 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] float speed = 5f;
     public int healthPoints = 50;
     int randomNumber;
-    //[SerializeField] int playerHealthPoints = 3;
-    //[SerializeField] float playerSaveTimeSeconds = 1.5f;
     [SerializeField] int pointsGained = 5;
     public int enemyLevel;
     [SerializeField] float knockbackPower = 50f;
@@ -18,20 +16,36 @@ public class EnemyScript : MonoBehaviour
     //[SerializeField] GameObject respawningEnemy;
     [HideInInspector] public static EnemyScript instance;
     [SerializeField] GameObject shieldPickUp;
-
+    
+    
+    AudioSource hitSound;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
+        if(player != null)
+        hitSound = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        
     }
 
     private void Start()
     {
         //scoreUI = GameObject.FindGameObjectWithTag("Score");
         //scoreText = scoreUI.GetComponent<TextMeshProUGUI>();
-
         instance = this;
+        
+    }
+
+    
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player Side")
+        {
+            
+            gameObject.transform.rotation = Quaternion.Euler(gameObject.transform.rotation.x, 0, gameObject.transform.rotation.z);
+        }
     }
 
     // Update is called once per frame
@@ -43,16 +57,11 @@ public class EnemyScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        //if(playerHealthPoints <= 0)
-        //{
-        //    Destroy(player);
-        //}
-
     }
 
     private void Update()
     {
+       
         if (healthPoints <= 0)
         {
             if (enemyLevel == 0)
@@ -91,7 +100,7 @@ public class EnemyScript : MonoBehaviour
                     respawnEnemyPos = transform.position;
                     StartCoroutine(respawnEnemy());
                     gameObject.GetComponent<Renderer>().enabled = false;
-                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    gameObject.GetComponent<PolygonCollider2D>().enabled = false;
                 }
 
                 if (respawnEnemyDied)
@@ -109,8 +118,19 @@ public class EnemyScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "Player Side")
         {
+          
+            gameObject.transform.rotation = Quaternion.Euler(gameObject.transform.rotation.x, 180, gameObject.transform.rotation.z);
+            
+        }
+
+        if (collision.gameObject.tag == "Bullet")
+        {
+            if (!hitSound.isPlaying)
+            {
+                hitSound.Play();
+            }
             healthPoints -= 25;
 
             Destroy(collision.gameObject);
@@ -166,28 +186,15 @@ public class EnemyScript : MonoBehaviour
 
         
 
-        //if (healthPoints <= 0)
-        //{
-        //   if(enemyLevel == 0)
-        //   {
-        //        Instantiate(gem[0], transform.position, Quaternion.identity);
-        //   }
-
-        //    if (enemyLevel == 1)
-        //    {
-        //        Instantiate(gem[1], transform.position, Quaternion.identity);
-        //    }
-
-        //    ScoreScript.instance.GainPoints(pointsGained);   
-        //    Destroy(gameObject);
-        //}
+       
+      
     }
 
     IEnumerator respawnEnemy()
     {
         yield return new WaitForSeconds(0.4f);
         gameObject.GetComponent<Renderer>().enabled = true;
-        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        gameObject.GetComponent<PolygonCollider2D>().enabled = true;
         healthPoints = 80;
         respawnEnemyDied = true;
         StopCoroutine(respawnEnemy());

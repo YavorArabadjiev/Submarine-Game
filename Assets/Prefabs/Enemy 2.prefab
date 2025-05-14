@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7055296075434796382}
   - component: {fileID: 8258232464475353353}
   - component: {fileID: 1114304015299501180}
-  - component: {fileID: 3463852933948277334}
   - component: {fileID: 1949383056384914094}
+  - component: {fileID: 3376522929706212551}
   m_Layer: 0
   m_Name: Enemy 2
   m_TagString: Enemy
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.3, y: -3.6, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 2.5994499, y: 2.5994499, z: 3.7135}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,8 +108,36 @@ MonoBehaviour:
   enemyLevel: 2
   knockbackPower: 0.8
   shieldPickUp: {fileID: 621226940687204629, guid: acd0d43fa0c9eb9448d635447e8f5b95, type: 3}
---- !u!61 &3463852933948277334
-BoxCollider2D:
+  playerSide: []
+--- !u!50 &1949383056384914094
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3375084156086431697}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: f244e67eaa618604b85b1b79ff41795a, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!60 &3376522929706212551
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -150,33 +178,46 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!50 &1949383056384914094
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3375084156086431697}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Points:
+    m_Paths:
+    - - {x: 0.13788088, y: -0.005416584}
+      - {x: 0.15354635, y: 0.02180128}
+      - {x: 0.16240807, y: 0.026167909}
+      - {x: 0.16297477, y: 0.04423647}
+      - {x: 0.16297477, y: 0.04423647}
+      - {x: 0.12995178, y: 0.044450022}
+      - {x: 0.1256398, y: 0.036339026}
+      - {x: 0.098459385, y: 0.007912036}
+      - {x: 0.08416858, y: 0.008009108}
+      - {x: 0.06932465, y: 0.028281841}
+      - {x: 0.052500468, y: 0.02881726}
+      - {x: 0.05334923, y: 0.0536632}
+      - {x: 0.063647896, y: 0.06558412}
+      - {x: 0.021679072, y: 0.064778954}
+      - {x: 0.016093265, y: 0.056509238}
+      - {x: 0.005475463, y: 0.056015708}
+      - {x: -0.061963, y: 0.056824278}
+      - {x: -0.10336262, y: 0.03347187}
+      - {x: -0.11994361, y: 0.017807089}
+      - {x: -0.124054626, y: 0.0074297506}
+      - {x: -0.17268929, y: 0.0054093227}
+      - {x: -0.15890469, y: -0.014777459}
+      - {x: -0.11282034, y: -0.016910063}
+      - {x: -0.10787895, y: -0.025883116}
+      - {x: -0.07158006, y: -0.025676716}
+      - {x: -0.07201194, y: -0.03449922}
+      - {x: -0.050906442, y: -0.036299963}
+      - {x: -0.0511544, y: -0.04590926}
+      - {x: -0.031755302, y: -0.0469961}
+      - {x: -0.029097276, y: -0.057556007}
+      - {x: -0.012386857, y: -0.057660565}
+      - {x: -0.01024109, y: -0.06665747}
+      - {x: 0.011314675, y: -0.06527394}
+      - {x: 0.011578296, y: -0.04679141}
+      - {x: 0.04753523, y: -0.04732274}
+      - {x: 0.062480323, y: -0.027041033}
+      - {x: 0.10475296, y: -0.026593946}
+      - {x: 0.11914867, y: -0.044309128}
+      - {x: 0.16759191, y: -0.0548555}
+      - {x: 0.1641601, y: -0.029671982}
+  m_UseDelaunayMesh: 0
