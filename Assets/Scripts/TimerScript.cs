@@ -8,6 +8,8 @@ public class TimerScript : MonoBehaviour
     [SerializeField] float currentTime;
     [SerializeField] bool countDown;
     [HideInInspector] public static TimerScript instance;
+    [SerializeField] GameObject gameOverMenu;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,31 +19,10 @@ public class TimerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (countDown)
-        {
-            currentTime -= Time.deltaTime;
-        }
-        else
-        {
-            currentTime += Time.deltaTime;
-        }
-
-        if (currentTime >= 10)
-        {
-            
-        }
+         currentTime += Time.deltaTime;
         timerSeconds.text = currentTime.ToString("0");
-
-        
     }
 
-//    IEnumerator minutesCounter()
-//    {
-//        while (true)
-//        {
-//           yield return new WaitForSeconds(10f);
-//           currentMinutes += 1f;
-//           timerMinutes.text += currentMinutes.ToString();
-//        }
-//    }
+
 }
+    

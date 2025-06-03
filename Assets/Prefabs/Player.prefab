@@ -594,6 +594,7 @@ MonoBehaviour:
   playerSaveTimeSeconds: 1.5
   gameOverMenu: {fileID: 0}
   maxposX: 12
+  minusMaxPosX: 0
   maxposY: 10
   healthUI:
   - {fileID: 0}
@@ -608,6 +609,7 @@ MonoBehaviour:
   - {fileID: 0}
   deadHeart: {fileID: 21300000, guid: 6dd7871901ced504c81006a534f1cd02, type: 3}
   speedUpText: {fileID: 0}
+  shieldPickup: {fileID: 0}
 --- !u!61 &956181575592165150
 BoxCollider2D:
   m_ObjectHideFlags: 0

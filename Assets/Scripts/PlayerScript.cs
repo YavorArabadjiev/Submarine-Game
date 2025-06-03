@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour
     private float playerpositionX;
     private float playerpositionY;
     [SerializeField] float maxposX;
+    [SerializeField] float minusMaxPosX;
     [SerializeField] float maxposY;
     [SerializeField] GameObject[] healthUI;
     [SerializeField] GameObject upgradeMenu;
@@ -30,6 +31,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] Sprite deadHeart;
     [SerializeField] TextMeshProUGUI speedUpText;
     [SerializeField] AudioSource shieldPickup;
+
     
     void Start()
     {
@@ -75,9 +77,11 @@ public class PlayerScript : MonoBehaviour
 
     private void ClampPlayer()
     {
-        playerpositionX = Mathf.Clamp(transform.position.x, -maxposX, maxposX);
+        playerpositionX = Mathf.Clamp(transform.position.x, -minusMaxPosX, maxposX);
         playerpositionY = Mathf.Clamp(transform.position.y, -maxposY, maxposY);
         transform.position = new Vector2(playerpositionX, playerpositionY);
+        
+
     }
 
     void MovePlayer()
