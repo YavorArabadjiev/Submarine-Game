@@ -19,6 +19,7 @@ TagManager:
   - Creature
   - Player Side
   - PickUpSound
+  - Destroyer
   layers:
   - Default
   - TransparentFX

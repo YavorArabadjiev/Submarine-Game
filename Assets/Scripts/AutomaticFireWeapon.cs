@@ -84,7 +84,7 @@ public class AutomaticFireWeapon : MonoBehaviour
             isTaken = true;
         }
         level++;
-        automaticFireWeaponText.text = "Auto Spikes L" + level;
+        automaticFireWeaponText.text = "Auto Spikes L" + (level + 1);
         if(level == 1)
         {
             StartCoroutine(autoShoot());

@@ -11,7 +11,7 @@ public class ShieldButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerEnter(PointerEventData eventData)
     {
         PowerUpDescText.instance.descObject.SetActive(true);
-        PowerUpDescText.instance.powerUpDesc.text = "Gives a shield health bar.";
+        PowerUpDescText.instance.powerUpDesc.text = "Increases amount of shields you can carry by one and ads 2 shields to your health bar. (Current shield capacity " + PlayerScript.instance.shieldCapacity + ")";
     }
 
     public void OnPointerExit(PointerEventData eventData)

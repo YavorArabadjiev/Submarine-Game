@@ -75,15 +75,15 @@ public class PoisonAreaScript : MonoBehaviour
             isTaken = true;
         }
         level++;
-        poisonGasText.text = "Poison Gas L" + level;
+        poisonGasText.text = "Poison Gas L" + (level + 1);
         if(level == 2)
         {
-            gameObject.transform.localScale = new Vector2(3.8f, 3.8f);
+            gameObject.transform.localScale = new Vector2(2.2f, 2.2f);
         }
 
         if (level == 3)
         {
-            gameObject.transform.localScale = new Vector2(5f, 5f);
+            gameObject.transform.localScale = new Vector2(2.6f, 2.6f);
         }
         gameObject.SetActive(true);
         ShootingScript.instance.upgradeMenu.SetActive(false);

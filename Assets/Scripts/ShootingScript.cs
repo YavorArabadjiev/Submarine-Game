@@ -145,7 +145,7 @@ public class ShootingScript : MonoBehaviour
         }
         
         level += 1;
-        biggerBulletsText.text = "Make Bullets Bigger L" + level;
+        biggerBulletsText.text = "Make Bullets Bigger L" + (level + 1);
         PowerUpDescText.instance.descObject.SetActive(false);
         upgradeMenu.SetActive(false);
         Time.timeScale = 1.0f;
@@ -183,7 +183,7 @@ public class ShootingScript : MonoBehaviour
             isTaken = true;
         }
         bulletAmountLevel += 1;
-        bulletAmountText.text = "Make Bullets Bigger L" + bulletAmountLevel;
+        bulletAmountText.text = "Make Bullets Bigger L" + (bulletAmountLevel + 1);
         if (bulletAmountLevel == 9)
         {
             bulletAmountButton.SetActive(false);
@@ -227,7 +227,7 @@ public class ShootingScript : MonoBehaviour
             isTaken = true;
         }
         reloadSpeedLevel += 1;
-        reloadSpeedText.text = "Reload Speed" + reloadSpeedLevel;
+        reloadSpeedText.text = "Reload Speed" + (reloadSpeedLevel + 1);
         upgradeMenu.SetActive(false);
         if (reloadSpeedLevel == 3)
         {

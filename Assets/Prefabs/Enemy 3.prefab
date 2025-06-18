@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1114304015299501180}
   - component: {fileID: 1949383056384914094}
   - component: {fileID: 7963541069647998095}
-  - component: {fileID: 5691960692776313732}
+  - component: {fileID: 2634201269255989061}
   m_Layer: 0
   m_Name: Enemy 3
   m_TagString: Enemy
@@ -157,8 +157,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!60 &5691960692776313732
-PolygonCollider2D:
+--- !u!61 &2634201269255989061
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -199,32 +199,6 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.085, y: 0.16}
-      - {x: 0.045018956, y: 0.1629694}
-      - {x: -0.044952206, y: 0.08688454}
-      - {x: -0.08293153, y: 0.11683063}
-      - {x: -0.13364604, y: 0.11396427}
-      - {x: -0.175, y: 0.07}
-      - {x: -0.17712943, y: 0.0069757104}
-      - {x: -0.13257556, y: -0.05054112}
-      - {x: -0.10188446, y: -0.061468676}
-      - {x: -0.1008404, y: -0.13916814}
-      - {x: -0.073548384, y: -0.14239822}
-      - {x: -0.010518774, y: -0.09841707}
-      - {x: 0.025357198, y: -0.16220132}
-      - {x: 0.06782895, y: -0.16165854}
-      - {x: 0.06728944, y: -0.13818103}
-      - {x: 0.0495764, y: -0.11504673}
-      - {x: 0.04896964, y: -0.09423799}
-      - {x: 0.07430443, y: -0.07060857}
-      - {x: 0.08928012, y: -0.10244101}
-      - {x: 0.11389842, y: -0.12878156}
-      - {x: 0.15229212, y: -0.1302122}
-      - {x: 0.1765694, y: -0.11387882}
-      - {x: 0.175, y: -0.08707981}
-      - {x: 0.16644724, y: 0.0044996752}
-      - {x: 0.119951226, y: 0.05526233}
-      - {x: 0.124902435, y: 0.12760189}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 0.35, y: 0.32}
+  m_EdgeRadius: 0

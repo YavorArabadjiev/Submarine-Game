@@ -31,16 +31,24 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] Sprite deadHeart;
     [SerializeField] TextMeshProUGUI speedUpText;
     [SerializeField] AudioSource shieldPickup;
+    [HideInInspector] public int shieldCapacity = 2;
+    public static PlayerScript instance;
+    public bool destroyAllEnemies = false;
+    [SerializeField] GameObject gem;
 
     
     void Start()
     {
-        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        
+        instance = this;
+        //enemy = GameObject.FindGameObjectsWithTag("Enemy");
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        print(enemy.Length);
         if (healthPoints == 2)
         {
             healthUI[2].GetComponent<Image>().sprite = deadHeart; 
@@ -132,13 +140,31 @@ public class PlayerScript : MonoBehaviour
                     healthPoints -= 0;
                 }
                 yield return new WaitForSeconds(playerSaveTimeSeconds);
+
+
             }
+
+            
         }
+
+        if (collision.gameObject.tag == "Destroyer")
+        {
+            foreach (GameObject enemy in enemy)
+            {
+                Instantiate(gem, enemy.transform.position, Quaternion.identity);
+                Destroy(enemy);
+            }
+            Destroy(collision.gameObject);
+        }
+
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
+       
+
         if (collision.gameObject.tag == "Heart")
         {
                 if (healthPoints < 3)
@@ -154,16 +180,25 @@ public class PlayerScript : MonoBehaviour
             {
                 shieldPickup.Play();
             }
-            if (shieldHealth < 2)
+            if (shieldHealth < shieldCapacity)
             {
                 shieldHealth++;
                 if(shieldHealth == 1)
                 {
-                    shieldUI[1].SetActive(true);
+                    shieldUI[0].SetActive(true);
                 }
                 if(shieldHealth == 2)
                 {
-                    shieldUI[0].SetActive(true);
+                    shieldUI[1].SetActive(true);
+                }
+
+                if (shieldHealth == 3)
+                {
+                    shieldUI[2].SetActive(true);
+                }
+                if (shieldHealth == 4)
+                {
+                    shieldUI[3].SetActive(true);
                 }
                 //if (shieldHealth == 1)
                 //{
@@ -229,7 +264,7 @@ public class PlayerScript : MonoBehaviour
             isTaken = true;
         }
         speedLevel++;
-        speedUpText.text = "Player Speed Up L" + speedLevel;
+        speedUpText.text = "Player Speed Up L" + (speedLevel + 1);
         if(speedLevel == 1)
         {
             moveSpeed += 1;
@@ -280,6 +315,7 @@ public class PlayerScript : MonoBehaviour
         shieldHealth = 2;
         shieldUI[0].SetActive(true);
         shieldUI[1].SetActive(true);
+        shieldCapacity = shieldCapacity + 1;
         upgradeMenu.SetActive(false);
         PowerUpDescText.instance.descObject.SetActive(false);
         Time.timeScale = 1;

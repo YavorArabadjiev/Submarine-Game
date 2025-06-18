@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -5,7 +6,9 @@ using UnityEngine.UI;
 public class GemUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     bool isTaken;
-   [SerializeField] Sprite gemSprite;
+    [SerializeField] Sprite gemSprite;
+    int level = 0;
+    [SerializeField] TextMeshProUGUI gemButtonText;
     public void OnPointerEnter(PointerEventData eventData)
     {
         PowerUpDescText.instance.descObject.SetActive(true);
@@ -49,5 +52,7 @@ public class GemUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
+        level += 1;
+        gemButtonText.text = "Gem Upgrade L " + (level + 1);
     }
 }

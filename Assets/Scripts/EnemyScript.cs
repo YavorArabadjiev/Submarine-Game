@@ -16,6 +16,7 @@ public class EnemyScript : MonoBehaviour
     //[SerializeField] GameObject respawningEnemy;
     [HideInInspector] public static EnemyScript instance;
     [SerializeField] GameObject shieldPickUp;
+    GameObject flamePickup;
     
     
     AudioSource hitSound;
@@ -34,6 +35,7 @@ public class EnemyScript : MonoBehaviour
         //scoreUI = GameObject.FindGameObjectWithTag("Score");
         //scoreText = scoreUI.GetComponent<TextMeshProUGUI>();
         instance = this;
+
         
     }
 
@@ -61,7 +63,8 @@ public class EnemyScript : MonoBehaviour
 
     private void Update()
     {
-       
+        
+
         if (healthPoints <= 0)
         {
             if (enemyLevel == 0)
@@ -75,8 +78,9 @@ public class EnemyScript : MonoBehaviour
                 {
                     Instantiate(gem[0], transform.position, Quaternion.identity);
                 }
-                
+               
                 Destroy(gameObject);
+
             }
 
             if (enemyLevel == 1)
@@ -90,6 +94,7 @@ public class EnemyScript : MonoBehaviour
                 {
                     Instantiate(gem[1], transform.position, Quaternion.identity);
                 }
+               
                 Destroy(gameObject);
             }
 
@@ -100,16 +105,24 @@ public class EnemyScript : MonoBehaviour
                     respawnEnemyPos = transform.position;
                     StartCoroutine(respawnEnemy());
                     gameObject.GetComponent<Renderer>().enabled = false;
-                    gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 }
 
                 if (respawnEnemyDied)
                 {
+                    int randomNumber = Random.Range(0, 3);
+                    if (randomNumber == 1)
+                    {
+                        flamePickup = GameObject.FindGameObjectWithTag("Destroyer");
+                        Instantiate(flamePickup, gameObject.transform.position, Quaternion.identity);
+                    }
                     Instantiate(gem[1], transform.position, Quaternion.identity);
+                    //ObjectPooleManager.instance.ReturnToPool(gameObject);
                     Destroy(gameObject);
                 }
             }
 
+            EnemySpawning.instance.enemySpawnCount--;
             ScoreScript.instance.GainPoints(pointsGained);
         }
 
@@ -194,7 +207,7 @@ public class EnemyScript : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
         gameObject.GetComponent<Renderer>().enabled = true;
-        gameObject.GetComponent<PolygonCollider2D>().enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
         healthPoints = 80;
         respawnEnemyDied = true;
         StopCoroutine(respawnEnemy());
