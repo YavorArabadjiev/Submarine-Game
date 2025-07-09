@@ -29,10 +29,10 @@ public class ExperienceBar : MonoBehaviour
     void Update()
     {
        ExperienceGain();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            currentXp += 20;
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    currentXp += 20;
+        //}
     }
 
     

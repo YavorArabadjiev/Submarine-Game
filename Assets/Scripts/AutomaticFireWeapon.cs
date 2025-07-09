@@ -15,6 +15,7 @@ public class AutomaticFireWeapon : MonoBehaviour
     [SerializeField] Sprite autoSpikesSprite;
     bool isTaken;
     [SerializeField] TextMeshProUGUI automaticFireWeaponText;
+    [SerializeField] GameObject autoBulletsIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +61,7 @@ public class AutomaticFireWeapon : MonoBehaviour
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[1].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = autoSpikesSprite;
@@ -68,7 +69,7 @@ public class AutomaticFireWeapon : MonoBehaviour
             isTaken = true;
         }
 
-        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[2].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = autoSpikesSprite;
@@ -76,7 +77,7 @@ public class AutomaticFireWeapon : MonoBehaviour
             isTaken = true;
         }
 
-        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[3].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = autoSpikesSprite;
@@ -88,6 +89,7 @@ public class AutomaticFireWeapon : MonoBehaviour
         if(level == 1)
         {
             StartCoroutine(autoShoot());
+
         }
         ExperienceBar.instance.upgradeMenu.SetActive(false);
         Time.timeScale = 1f;
@@ -96,6 +98,7 @@ public class AutomaticFireWeapon : MonoBehaviour
         if (level == 2)
         {
             shootTime = 3f;
+            autoWeaponShootPower = 60;
         }
 
         if (level == 3)
@@ -104,8 +107,9 @@ public class AutomaticFireWeapon : MonoBehaviour
         }
         if(level == 4)
         {
-            autoWeaponShootPower = 50;
+            autoWeaponShootPower = 80;
             autoBulletsButton.SetActive(false);
+            TurnOffMenuScript.instance.TurnOffButton(autoBulletsButton, autoBulletsIcon);
         }
     }
 

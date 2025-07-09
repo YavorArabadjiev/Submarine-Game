@@ -11,7 +11,7 @@ public class PlayerScript : MonoBehaviour
     int healthPoints = 3;
     Rigidbody2D rb;
     [SerializeField] GameObject[] enemy;
-    [SerializeField] float playerSaveTimeSeconds = 1.5f;
+    //[SerializeField] float playerSaveTimeSeconds = 1.5f;
     [SerializeField] GameObject gameOverMenu;
     private float playerpositionX;
     private float playerpositionY;
@@ -27,11 +27,11 @@ public class PlayerScript : MonoBehaviour
     bool isTaken = false;
     bool shieldPowerTaken = false;
     [SerializeField] GameObject[] shieldUI;
-    int shieldHealth = 0;
+    int shieldHealth = -1;
     [SerializeField] Sprite deadHeart;
     [SerializeField] TextMeshProUGUI speedUpText;
     [SerializeField] AudioSource shieldPickup;
-    [HideInInspector] public int shieldCapacity = 2;
+    [HideInInspector] public int shieldCapacity = 1;
     public static PlayerScript instance;
     public bool destroyAllEnemies = false;
     [SerializeField] GameObject gem;
@@ -48,16 +48,16 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
-        print(enemy.Length);
-        if (healthPoints == 2)
-        {
-            healthUI[2].GetComponent<Image>().sprite = deadHeart; 
-        }
+        //print(enemy.Length);
+        //if (healthPoints == 2)
+        //{
+        //    healthUI[2].GetComponent<Image>().sprite = deadHeart; 
+        //}
 
-        if (healthPoints == 1)
-        {
-            healthUI[1].GetComponent<Image>().sprite = deadHeart;
-        }
+        //if (healthPoints == 1)
+        //{
+        //    healthUI[1].GetComponent<Image>().sprite = deadHeart;
+        //}
 
         if (healthPoints <= 0)
         {
@@ -104,47 +104,45 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            if (shieldHealth != 0)
+            StartCoroutine(Cooldown());
+
+            if (shieldHealth > -1)
             {
+                shieldUI[shieldHealth].SetActive(false);
                 shieldHealth--;
                 
             }
+
             else
             {
                 healthPoints -= 1;
+                healthUI[healthPoints].GetComponent<Image>().sprite = deadHeart;
             }
-            
-
-            if(shieldHealth == 1)
-            {
-                shieldUI[0].SetActive(false);
-            }
-
-            if (shieldHealth == 0)
-            {
-                shieldUI[1].SetActive(false);
-            }
-            else
-            {
-                shieldUI[1].SetActive(true);
-            }
+   
+           
 
             Destroy(collision.gameObject);
-            StartCoroutine(safeTime());
+           
+            
+        }
 
-            IEnumerator safeTime()
+        if (collision.gameObject.tag == "Fireball" || collision.gameObject.tag == "Final Boss")
+        {
+            StartCoroutine(Cooldown());
+
+            if (shieldHealth > -1)
             {
-
-                if (collision.gameObject.tag == "Enemy")
-                {
-                    healthPoints -= 0;
-                }
-                yield return new WaitForSeconds(playerSaveTimeSeconds);
-
+                shieldUI[shieldHealth].SetActive(false);
+                shieldHealth--;
 
             }
 
-            
+            else
+            {
+                healthPoints -= 1;
+                healthUI[healthPoints].GetComponent<Image>().sprite = deadHeart;
+            }
+
         }
 
         if (collision.gameObject.tag == "Destroyer")
@@ -183,23 +181,24 @@ public class PlayerScript : MonoBehaviour
             if (shieldHealth < shieldCapacity)
             {
                 shieldHealth++;
-                if(shieldHealth == 1)
-                {
-                    shieldUI[0].SetActive(true);
-                }
-                if(shieldHealth == 2)
-                {
-                    shieldUI[1].SetActive(true);
-                }
+                shieldUI[shieldHealth].SetActive(true);
+                //if(shieldHealth == 1)
+                //{
+                //    shieldUI[0].SetActive(true);
+                //}
+                //if(shieldHealth == 2)
+                //{
+                //    shieldUI[1].SetActive(true);
+                //}
 
-                if (shieldHealth == 3)
-                {
-                    shieldUI[2].SetActive(true);
-                }
-                if (shieldHealth == 4)
-                {
-                    shieldUI[3].SetActive(true);
-                }
+                //if (shieldHealth == 3)
+                //{
+                //    shieldUI[2].SetActive(true);
+                //}
+                //if (shieldHealth == 4)
+                //{
+                //    shieldUI[3].SetActive(true);
+                //}
                 //if (shieldHealth == 1)
                 //{
                 //    if (shieldUI[1].activeSelf)
@@ -232,6 +231,28 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    IEnumerator Cooldown()
+    {
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
+        yield return new WaitForSeconds(0.3f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+        yield return new WaitForSeconds(0.3f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
+        yield return new WaitForSeconds(0.3f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+        yield return new WaitForSeconds(0.3f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
+        yield return new WaitForSeconds(0.3f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+        yield return new WaitForSeconds(0.3f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
+        yield return new WaitForSeconds(0.3f);
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+        StopCoroutine(Cooldown());
+    }
+
     public void SpeedUpButton()
     {
         if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
@@ -241,14 +262,14 @@ public class PlayerScript : MonoBehaviour
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[1].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = speedSprite;
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[2].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = speedSprite;
@@ -256,7 +277,7 @@ public class PlayerScript : MonoBehaviour
             isTaken = true;
         }
 
-        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[3].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = speedSprite;
@@ -289,7 +310,7 @@ public class PlayerScript : MonoBehaviour
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
             shieldPowerTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[1].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = shieldSprite;
@@ -297,7 +318,7 @@ public class PlayerScript : MonoBehaviour
             shieldPowerTaken = true;
         }
 
-        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[2].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = shieldSprite;
@@ -305,7 +326,7 @@ public class PlayerScript : MonoBehaviour
             shieldPowerTaken = true;
         }
 
-        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed & !shieldPowerTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[3].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = shieldSprite;

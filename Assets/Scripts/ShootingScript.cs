@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ShootingScript : MonoBehaviour
 {
     [SerializeField] GameObject[] bullet;
-    int level = 1;
+   [HideInInspector] public int level = 1;
     public GameObject upgradeMenu;
     [SerializeField] GameObject bulletAmountButton;
     [SerializeField] GameObject reloadSpeedButton;
@@ -26,6 +26,10 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI biggerBulletsText;
     [SerializeField] TextMeshProUGUI bulletAmountText;
     [SerializeField] TextMeshProUGUI reloadSpeedText;
+    [SerializeField] GameObject biggerBulletButton;
+    [SerializeField] GameObject biggerBulletIcon;
+    [SerializeField] GameObject bulletAmountIcon;
+    [SerializeField] GameObject reloadSpeedIcon;
 
 
     // Start is called before the first frame update
@@ -62,6 +66,9 @@ public class ShootingScript : MonoBehaviour
                 bulletsShot++;
                 Instantiate(bullet[2], transform.position, Quaternion.identity);
             }
+
+            TurnOffMenuScript.instance.TurnOffButton(biggerBulletButton, biggerBulletIcon);
+            biggerBulletsText.text = "No More Levels";
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -123,21 +130,21 @@ public class ShootingScript : MonoBehaviour
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[1].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = biggerBulletSprite;
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[2].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = biggerBulletSprite;
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {   PowerUpBoxes.instance.powerUpBoxes[3].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = biggerBulletSprite;
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
@@ -161,21 +168,21 @@ public class ShootingScript : MonoBehaviour
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {   
             PowerUpBoxes.instance.powerUpBoxes[1].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = bulletAmountSprite;
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {   
             PowerUpBoxes.instance.powerUpBoxes[2].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = bulletAmountSprite;
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {   
             PowerUpBoxes.instance.powerUpBoxes[3].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = bulletAmountSprite;
@@ -184,9 +191,10 @@ public class ShootingScript : MonoBehaviour
         }
         bulletAmountLevel += 1;
         bulletAmountText.text = "Make Bullets Bigger L" + (bulletAmountLevel + 1);
-        if (bulletAmountLevel == 9)
+        if (bulletAmountLevel >= 9)
         {
-            bulletAmountButton.SetActive(false);
+            TurnOffMenuScript.instance.TurnOffButton(bulletAmountButton, bulletAmountIcon);
+            bulletAmountText.text = "No More Levels";
         }
         upgradeMenu.SetActive(false);
         PowerUpDescText.instance.descObject.SetActive(false);
@@ -205,21 +213,21 @@ public class ShootingScript : MonoBehaviour
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[1].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = reloadSprite;
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[2].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = reloadSprite;
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[3].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = reloadSprite;
@@ -229,9 +237,10 @@ public class ShootingScript : MonoBehaviour
         reloadSpeedLevel += 1;
         reloadSpeedText.text = "Reload Speed" + (reloadSpeedLevel + 1);
         upgradeMenu.SetActive(false);
-        if (reloadSpeedLevel == 3)
+        if (reloadSpeedLevel >= 3)
         {
-            reloadSpeedButton.SetActive(false);
+            TurnOffMenuScript.instance.TurnOffButton(reloadSpeedButton, reloadSpeedIcon);
+            reloadSpeedText.text = "No More Levels";
         }
         PowerUpDescText.instance.descObject.SetActive(false);
         Time.timeScale = 1.0f;

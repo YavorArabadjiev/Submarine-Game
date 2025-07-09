@@ -208,6 +208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poisonAreaSprite: {fileID: 21300000, guid: a1ca466dc75b01a4785691a959df24ae, type: 3}
   poisonGasText: {fileID: 0}
+  poisonButton: {fileID: 0}
+  poisonIcon: {fileID: 0}
 --- !u!58 &48862786637124611
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -468,6 +470,7 @@ MonoBehaviour:
   - {fileID: 4543427655390565292, guid: 6fac2c82befa7144f9e9cbd77b75c0e8, type: 3}
   - {fileID: 4543427655390565292, guid: 17ffeebdadfa6ac4887531bf64d5d49d, type: 3}
   - {fileID: 4543427655390565292, guid: bfe595e57a2def34ca33b64acab20f25, type: 3}
+  level: 1
   upgradeMenu: {fileID: 0}
   bulletAmountButton: {fileID: 0}
   reloadSpeedButton: {fileID: 0}
@@ -483,6 +486,10 @@ MonoBehaviour:
   biggerBulletsText: {fileID: 0}
   bulletAmountText: {fileID: 0}
   reloadSpeedText: {fileID: 0}
+  biggerBulletButton: {fileID: 0}
+  biggerBulletIcon: {fileID: 0}
+  bulletAmountIcon: {fileID: 0}
+  reloadSpeedIcon: {fileID: 0}
 --- !u!1 &9054165628949248483
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +576,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -610,6 +617,9 @@ MonoBehaviour:
   deadHeart: {fileID: 21300000, guid: 6dd7871901ced504c81006a534f1cd02, type: 3}
   speedUpText: {fileID: 0}
   shieldPickup: {fileID: 0}
+  shieldCapacity: 2
+  destroyAllEnemies: 0
+  gem: {fileID: 0}
 --- !u!61 &956181575592165150
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -647,7 +657,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.28, y: 1.28}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

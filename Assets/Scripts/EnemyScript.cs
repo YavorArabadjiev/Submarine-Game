@@ -16,7 +16,7 @@ public class EnemyScript : MonoBehaviour
     //[SerializeField] GameObject respawningEnemy;
     [HideInInspector] public static EnemyScript instance;
     [SerializeField] GameObject shieldPickUp;
-    GameObject flamePickup;
+    [SerializeField] GameObject flamePickup;
     
     
     AudioSource hitSound;
@@ -98,7 +98,22 @@ public class EnemyScript : MonoBehaviour
                 Destroy(gameObject);
             }
 
-            if(enemyLevel == 2)
+            if (enemyLevel == 3)
+            {
+                randomNumber = Random.Range(0, 6);
+                if (randomNumber == 1)
+                {
+                    Instantiate(shieldPickUp, transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(gem[2], transform.position, Quaternion.identity);
+                }
+
+                Destroy(gameObject);
+            }
+
+            if (enemyLevel == 2)
             {
                 if (!respawnEnemyDied)
                 {
@@ -113,7 +128,7 @@ public class EnemyScript : MonoBehaviour
                     int randomNumber = Random.Range(0, 3);
                     if (randomNumber == 1)
                     {
-                        flamePickup = GameObject.FindGameObjectWithTag("Destroyer");
+                        
                         Instantiate(flamePickup, gameObject.transform.position, Quaternion.identity);
                     }
                     Instantiate(gem[1], transform.position, Quaternion.identity);
@@ -140,6 +155,11 @@ public class EnemyScript : MonoBehaviour
 
         if (collision.gameObject.tag == "Bullet")
         {
+            if (ShootingScript.instance.level == 2)
+                healthPoints -= 25;
+            if (ShootingScript.instance.level == 3)
+                healthPoints -= 50;
+
             if (!hitSound.isPlaying)
             {
                 hitSound.Play();
@@ -169,7 +189,7 @@ public class EnemyScript : MonoBehaviour
 
         if (collision.gameObject.tag == "Creature")
         {
-            healthPoints -= healthPoints;
+            healthPoints -= 500;
         }
 
             if (collision.gameObject.tag == "AutoBullet")
@@ -205,7 +225,13 @@ public class EnemyScript : MonoBehaviour
 
     IEnumerator respawnEnemy()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
+        gameObject.GetComponent<Renderer>().enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        yield return new WaitForSeconds(0.2f);
+        gameObject.GetComponent<Renderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        yield return new WaitForSeconds(0.2f);
         gameObject.GetComponent<Renderer>().enabled = true;
         gameObject.GetComponent<BoxCollider2D>().enabled = true;
         healthPoints = 80;

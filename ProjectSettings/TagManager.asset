@@ -20,6 +20,9 @@ TagManager:
   - Player Side
   - PickUpSound
   - Destroyer
+  - Fireball
+  - Final Boss
+  - Tentacle
   layers:
   - Default
   - TransparentFX

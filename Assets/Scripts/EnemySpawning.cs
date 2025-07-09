@@ -12,12 +12,14 @@ public class EnemySpawning : MonoBehaviour
     float randomNumberX2;
     int randomEnemies1;
     int randomEnemies2;
+    int randomEnemies3;
     [SerializeField] Vector2[] randomSpawnPos;
     int randomSpawnRange;
-    bool reduceBossSpawn;
+    //bool reduceBossSpawn;
     float bossSpawnTime = 30f;
    [HideInInspector] public int enemySpawnCount = 0;
     public static EnemySpawning instance;
+    [SerializeField] GameObject finalBoss;
     //[SerializeField] float timeTillNextPhase = 5f;
     
     
@@ -38,7 +40,8 @@ public class EnemySpawning : MonoBehaviour
         randomNumberX = Random.Range(-9, 10);
         randomNumberX2 = Random.Range(-9, 10);
         randomEnemies1 = Random.Range(0, 2);
-        randomEnemies2 = Random.Range(0, enemy.Length + 1);
+        randomEnemies2 = Random.Range(0, 3);
+        randomEnemies3 = Random.Range(0, enemy.Length + 1);
         
 
         //print(enemySpawnCount);
@@ -92,7 +95,7 @@ public class EnemySpawning : MonoBehaviour
             while (true)
             {
 
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(12f);
                 if(player != null)
                 {
                     randomSpawnPos[0] = new Vector2(randomNumberX, player.transform.position.y - 8f);
@@ -120,10 +123,10 @@ public class EnemySpawning : MonoBehaviour
 
     IEnumerator enemySpawning3()
     {
-        reduceBossSpawn = true;
+        //reduceBossSpawn = true;
         while (true)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(50f);
             if (player != null)
             {
                 randomSpawnPos[0] = new Vector2(randomNumberX, player.transform.position.y - 8f);
@@ -141,9 +144,47 @@ public class EnemySpawning : MonoBehaviour
             //    enemySpawnCount++;
             //}
 
+            if (ExperienceBar.instance.level == 6)
+            {
+                StartCoroutine(enemySpawning4());
+                StopCoroutine(enemySpawning3());
+            }
         }
     }
-       
+
+    IEnumerator enemySpawning4()
+    {
+        //reduceBossSpawn = true;
+        while (true)
+        {
+            yield return new WaitForSeconds(140f);
+            if (player != null)
+            {
+                randomSpawnPos[0] = new Vector2(randomNumberX, player.transform.position.y - 8f);
+                randomSpawnPos[1] = new Vector2(randomNumberX, player.transform.position.x - 14f);
+                randomSpawnPos[2] = new Vector2(randomNumberX2, player.transform.position.x + 14f);
+                randomSpawnPos[3] = new Vector2(randomNumberX2, player.transform.position.y + 8f);
+            }
+
+            randomSpawnRange = Random.Range(0, randomSpawnPos.Length);
+            Instantiate(enemy[randomEnemies3], randomSpawnPos[randomSpawnRange], Quaternion.identity);
+
+            //if (enemySpawnCount != 50)
+            //{
+            //    Instantiate(enemy[randomEnemies2], randomSpawnPos[randomSpawnRange], Quaternion.identity);
+            //    enemySpawnCount++;
+            //}
+
+
+            if (ExperienceBar.instance.level == 8)
+            {
+                //StartCoroutine(enemySpawning4());
+                finalBoss.SetActive(true);
+                StopCoroutine(enemySpawning4());
+            }
+        }
+    }
+
 
     IEnumerator bossSpawning()
     {
@@ -162,10 +203,10 @@ public class EnemySpawning : MonoBehaviour
                 randomSpawnRange = Random.Range(0, randomSpawnPos.Length);
                 Instantiate(bossEnemy, randomSpawnPos[randomSpawnRange], Quaternion.identity);
 
-                if (reduceBossSpawn)
-                {
-                    bossSpawnTime = bossSpawnTime - 10f;
-                }
+                //if (reduceBossSpawn)
+                //{
+                //    bossSpawnTime = bossSpawnTime - 10f;
+                //}
             }
     }
     

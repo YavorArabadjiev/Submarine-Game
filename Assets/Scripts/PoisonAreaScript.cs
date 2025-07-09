@@ -14,6 +14,8 @@ public class PoisonAreaScript : MonoBehaviour
     [SerializeField] Sprite poisonAreaSprite;
     int damage = 3;
     [SerializeField] TextMeshProUGUI poisonGasText;
+    [SerializeField] GameObject poisonButton;
+    [SerializeField] GameObject poisonIcon;
 
 
     
@@ -49,26 +51,27 @@ public class PoisonAreaScript : MonoBehaviour
     {
 
         if (!PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
-        {   PowerUpBoxes.instance.powerUpBoxes[0].SetActive(true);
+        {   
+            PowerUpBoxes.instance.powerUpBoxes[0].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<Image>().sprite = poisonAreaSprite;
             PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[0].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[1].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<Image>().sprite = poisonAreaSprite;
             PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[1].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {
             PowerUpBoxes.instance.powerUpBoxes[2].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<Image>().sprite = poisonAreaSprite;
             PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed = true;
             isTaken = true;
         }
-        else if (PowerUpBoxes.instance.powerUpBoxes[2].GetComponent<PowerUpBox>().isUsed & !isTaken)
+        if (!PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed & !isTaken)
         {   PowerUpBoxes.instance.powerUpBoxes[3].SetActive(true);
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<Image>().sprite = poisonAreaSprite;
             PowerUpBoxes.instance.powerUpBoxes[3].GetComponent<PowerUpBox>().isUsed = true;
@@ -78,13 +81,19 @@ public class PoisonAreaScript : MonoBehaviour
         poisonGasText.text = "Poison Gas L" + (level + 1);
         if(level == 2)
         {
+            damage += 1;
             gameObject.transform.localScale = new Vector2(2.2f, 2.2f);
         }
 
-        if (level == 3)
+        if (level >= 3)
         {
+            damage += 1;
             gameObject.transform.localScale = new Vector2(2.6f, 2.6f);
+            TurnOffMenuScript.instance.TurnOffButton(poisonButton, poisonIcon);
+            poisonGasText.text = "No More Levels";
         }
+
+        
         gameObject.SetActive(true);
         ShootingScript.instance.upgradeMenu.SetActive(false);
         PowerUpDescText.instance.descObject.SetActive(false);

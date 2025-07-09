@@ -5,7 +5,7 @@ public class BulletScript : MonoBehaviour
 {
 
     Vector3 mousePosition;
-    new Camera camera;
+   new Camera camera;
     Rigidbody2D rb;
     [SerializeField] float bulletSpeed;
     [SerializeField] float timeBeforeDestruction = 2f;
@@ -35,9 +35,8 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Item Drop")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Tentacle")
         {
-
             Destroy(gameObject);
         }
     }

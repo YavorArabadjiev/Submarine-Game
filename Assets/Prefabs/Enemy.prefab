@@ -81,7 +81,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,9 +105,10 @@ MonoBehaviour:
   speed: 2
   healthPoints: 50
   pointsGained: 5
-  enemyLevel: 0
+  enemyLevel: 1
   knockbackPower: 0.8
   shieldPickUp: {fileID: 621226940687204629, guid: acd0d43fa0c9eb9448d635447e8f5b95, type: 3}
+  flamePickup: {fileID: 5103332806552083839, guid: 580f9c38d48510e4a850c18b22a9c5aa, type: 3}
 --- !u!50 &1949383056384914094
 Rigidbody2D:
   serializedVersion: 4
@@ -172,7 +173,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.28, y: 1.28}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
